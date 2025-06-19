@@ -1,4 +1,4 @@
-package proyecto.web.trabajofinal;
+package proyecto.web.trabajofinal.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +22,6 @@ public class UsuarioController {
     public String sobremi(){
         return "sobremi";
     }
-    @GetMapping("/editor")
-    public String editor(){
-        return "editor";
-    }
+
+
 }

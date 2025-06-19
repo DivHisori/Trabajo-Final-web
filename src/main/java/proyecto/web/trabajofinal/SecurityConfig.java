@@ -1,9 +1,7 @@
 package proyecto.web.trabajofinal;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,15 +15,13 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails editor = User.withDefaultPasswordEncoder()
-                .username("editor")
-                .password("1234")
-                .roles("EDITOR")
+                .username("admin")
+                .password("admin")
                 .build();
 
         UserDetails user = User.withDefaultPasswordEncoder()
                 .username("usuario")
                 .password("1234")
-                .roles("USER")
                 .build();
 
         return new InMemoryUserDetailsManager(editor, user);
@@ -35,12 +31,14 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/editor").hasRole("EDITOR")
+                        .requestMatchers("/editor").hasRole("editor")
                         .anyRequest().permitAll()
                 )
 
                 .formLogin(login -> login
-                        .defaultSuccessUrl("/editor", true) // Redirige siempre a /editor después del login
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/editor") // Redirige siempre a /editor después del Login
+                        .permitAll()
                 )
 
                 .exceptionHandling(ex -> ex
