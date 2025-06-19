@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
-<!--
- Esta sección del código corresponde al encabezado (<head>) del documento HTML.
-- Define la codificación de caracteres como UTF-8.
-- Configura la vista para dispositivos móviles con la meta viewport.
-- Incluye la hoja de estilos local "style-proyecto.css".
-- Agrega los iconos de Font Awesome desde CDN.
-- Preconecta a Google Fonts para mejorar el rendimiento de carga de fuentes.
-- Importa las familias de fuentes "Poppins" y "Roboto" desde Google Fonts..
--->
+    <!--
+     Esta sección del código corresponde al encabezado (<head>) del documento HTML.
+    - Define la codificación de caracteres como UTF-8.
+    - Configura la vista para dispositivos móviles con la meta viewport.
+    - Incluye la hoja de estilos local "style-proyecto.css".
+    - Agrega los iconos de Font Awesome desde CDN.
+    - Preconecta a Google Fonts para mejorar el rendimiento de carga de fuentes.
+    - Importa las familias de fuentes "Poppins" y "Roboto" desde Google Fonts..
+    -->
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style-proyecto.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <title>Andres Garza</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-proyecto.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Andres Garza</title>
 </head>
 
 <!-- ========================= -->
@@ -25,279 +25,266 @@
 <!-- ========================= -->
 <body>
 
-<!-- Selector de colores para personalizar la interfaz -->
-<!--
-  .container-color-botones: Contiene el botón y el menú de colores.
-  .boton-personalizacion-color: Abre/cierra el menú (accesible con ARIA).
-  .menu-desplegable-colores: Lista de botones circulares para elegir color (data-color).
-  Accesibilidad: ARIA y tabindex para mejor navegación.
--->
-<div class="container-color-botones">
-  <a class="boton-personalizacion-color" aria-expanded="false" aria-controls="menu-colores" title="Abrir selector de colores"><i class="fa-solid fa-pen" ></i></a>
-  <div class="menu-desplegable-colores" id="menu-colores" role="menu" aria-hidden="true" tabindex="-1">
-    <button class="circulo-color"  data-color="#e93535" role="listitem"></button>
-    <button class="circulo-color" data-color="#00cc00" role="listitem"></button>
-    <button class="circulo-color" data-color="#ff5e00" role="listitem"></button>
-    <button class="circulo-color" data-color="#23a7ff" role="listitem"></button>
-    <button class="circulo-color" data-color="#9900ff" role="listitem"></button>
-  </div>
-</div>
-<button id="color-toggle-btn" aria-label="Cambiar colores de fondo y texto" aria-pressed="false" type="button">
-  <i id="icon-sun" class="fa-solid fa-sun" style="display: inline-block;"></i>
-  <i id="icon-moon" class="fa-solid fa-moon" style="display: none;"></i>
-</button>
-<!-- ========================= -->
-<!-- Inicio del header -->
-<!-- ========================= -->
-<header>
-  <div class="container-header">
-    <a href="index.html" class="logo">Andres <span>Garza</span> </a>
-    <button class="btn-menu" aria-label="Abrir menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-
-    <nav class="navbar">
-      <ul>
-        <li><a href="/index">Inicio</a></li>
-        <li><a href="/sobremi">Sobre mí</a></li>
-        <li><a href="/proyectos">Proyectos</a></li>
-        <li><a href="/contacto">Contacto</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-<!-- ========================= -->
-<!-- Inicio de la sección principal de la pagina proyectos. -->
-<!-- ========================= -->
-<main>
-  <section class="proyectos-principal" id="proyectos">
-
-    <h2 class="texto-ascendente-principal texto-miproyec">Mis <span>Proyectos</span></h2>
+    <!-- Selector de colores para personalizar la interfaz -->
     <!--
-        Sección de filtros para proyectos.
-        Contiene botones que permiten filtrar los proyectos mostrados según su categoría:
-        "Todos", "Web", "Movile" (móvil) y "Desktop".
-        El botón "Todos" está activo por defecto.
-        Cada botón utiliza el atributo 'data-filtro' para indicar la categoría correspondiente.
+      .container-color-botones: Contiene el botón y el menú de colores.
+      .boton-personalizacion-color: Abre/cierra el menú (accesible con ARIA).
+      .menu-desplegable-colores: Lista de botones circulares para elegir color (data-color).
+      Accesibilidad: ARIA y tabindex para mejor navegación.
     -->
-    <div id="filtros" class="texto-ascendente-principal">
-      <button class="active" data-filtro="todos">Todos</button>
-      <button data-filtro="web">Web</button>
-      <button data-filtro="movile">Movile</button>
-      <button data-filtro="desktop">Desktop</button>
+    <div class="container-color-botones">
+        <a class="boton-personalizacion-color" aria-expanded="false" aria-controls="menu-colores" title="Abrir selector de colores"><i class="fa-solid fa-pen" ></i></a>
+        <div class="menu-desplegable-colores" id="menu-colores" role="menu" aria-hidden="true" tabindex="-1">
+            <button class="circulo-color"  data-color="#e93535" role="listitem"></button>
+            <button class="circulo-color" data-color="#00cc00" role="listitem"></button>
+            <button class="circulo-color" data-color="#ff5e00" role="listitem"></button>
+            <button class="circulo-color" data-color="#23a7ff" role="listitem"></button>
+            <button class="circulo-color" data-color="#9900ff" role="listitem"></button>
+        </div>
     </div>
+    <button id="color-toggle-btn" aria-label="Cambiar colores de fondo y texto" aria-pressed="false" type="button">
+        <i id="icon-sun" class="fa-solid fa-sun" style="display: inline-block;"></i>
+        <i id="icon-moon" class="fa-solid fa-moon" style="display: none;"></i>
+    </button>
+    <!-- ========================= -->
+    <!-- Inicio del header -->
+    <!-- ========================= -->
+    <header>
+        <div class="container-header">
+            <a href="index.html" class="logo"><h3 class="nombre-display">Andres</h3><span class="apellido-display">Garza</span> </a>
+            <button class="btn-menu" aria-label="Abrir menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+            
+            <nav class="navbar">
+                <ul>
+                    <li><a href="/index">Inicio</a></li>
+                    <li><a href="/sobremi">Sobre mí</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="/contacto">Contacto</a></li>
+                </ul>   
+            </nav>
+        </div>        
+    </header>
+    <!-- ========================= -->
+    <!-- Inicio de la sección principal de la pagina proyectos. -->
+    <!-- ========================= -->
+    <main>
+        <section class="proyectos-principal" id="proyectos">
+            
+            <h2 class="texto-ascendente-principal texto-miproyec">Mis <span>Proyectos</span></h2>
+            <!--
+                Sección de filtros para proyectos.
+                Contiene botones que permiten filtrar los proyectos mostrados según su categoría:
+                "Todos", "Web", "Movile" (móvil) y "Desktop".
+                El botón "Todos" está activo por defecto.
+                Cada botón utiliza el atributo 'data-filtro' para indicar la categoría correspondiente.
+            -->
+            <div id="filtros" class="texto-ascendente-principal">
+                <button class="active" data-filtro="todos">Todos</button>
+                <button data-filtro="web">Web</button>
+                <button data-filtro="movile">Movile</button>
+                <button data-filtro="desktop">Desktop</button>
+            </div>
+            <!-- 
+                Sección: Tarjetas de Proyectos
+
+                Descripción:
+                Este bloque de código HTML representa una galería de tarjetas de proyectos para un portafolio web. 
+                Cada tarjeta muestra información relevante sobre un proyecto, incluyendo su imagen, título, fecha, especialidad, descripción y tecnologías utilizadas.
+            -->
+            <div class="proyectos-targetas">
+                <div data-categoria="web" class="proyectos-targeta">
+                    <img src="targeta-cafe.jpg" alt="cafeteria">
+                    <div class="texto-targeta-proyecto">
+                        <div class="contenido-scrolleable">
+                        <div class="titulo-fecha">
+                                <h3 class="titulo-targeta">Proyecto 1</h3>
+                                <p>2023-2024</p>
+                        </div>
+                        <h4 class="especialidad">Fronted Service</h4>
+                        <p class="descripcion-targeta">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ipsum itaque ullam culpa animi maxime ducimus vero iste magni eum, veritatis illo inventore perferendis consequuntur ea aspernatur blanditiis quo? Sed? Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum eos voluptatibus facere quos. A quod sit, eum voluptates animi unde ullam sed eveniet placeat est qui architecto quasi facilis possimus?</p>
+                        <div class="tecnologia">
+                            <h4>Tecnologia usada:</h4>
+                            <div class="etiquetas-tecnologias">
+                                <p> <i class="fa-brands fa-html5"></i>html</p>
+                                <p> <i class="fa-brands fa-css3-alt"></i>css</p>
+                                <p><i class="fa-brands fa-js"></i>JavaScript</p>
+                            </div>
+                        </div>
+                        <div class="container-btn-repo">
+                            <a target="_blank" href="https://github.com/" class="btn-repo">Github Repo</a>
+                        </div>
+                        </div>  
+                    </div>
+                    
+                </div>
+                <div data-categoria="web" class="proyectos-targeta">
+                    <img src="targeta-app.jpg" alt="cafeteria">
+                    <div class="texto-targeta-proyecto">
+                            <div class="contenido-scrolleable">
+                        
+                            <div class="titulo-fecha">
+                                    <h3 class="titulo-targeta">Proyecto 2</h3>
+                                    <p>2025</p>
+                            </div>
+                            <h4 class="especialidad">Full stack service</h4>
+                                
+                            <p class="descripcion-targeta">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ipsum itaque ullam culpa animi maxime ducimus vero iste magni eum, veritatis illo inventore perferendis consequuntur ea aspernatur blanditiis quo? Sed? Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum eos voluptatibus facere quos. A quod sit, eum voluptates animi unde ullam sed eveniet placeat est qui architecto quasi facilis possimus?</p>
+                            <div class="tecnologia">
+                                <h4>Tecnologia usada:</h4>
+                                <div class="etiquetas-tecnologias">
+                                    <p> <i class="fa-brands fa-vuejs"></i>vue.js</p>
+                                    <p> <i class="fa-brands fa-node"></i>Node.js</p>
+                                </div>
+                            </div>
+                            <div class="container-btn-repo">
+                                <a target="_blank" href="https://github.com/" class="btn-repo">Github Repo</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div data-categoria="movile" class="proyectos-targeta">
+                    <img src="targeta-app-movile.png" alt="cafeteria">
+                    <div class="texto-targeta-proyecto">
+                        <div class="contenido-scrolleable">
+                            <div class="titulo-fecha">
+                                    <h3 class="titulo-targeta">Proyecto 3</h3>
+                                    <p>2023-2024</p>
+                            </div>
+                            <h4 class="especialidad">Movile App Service</h4>
+                                
+                            <p class="descripcion-targeta" >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem explicabo, aperiam aut sapiente nulla ut consectetur, eius at a quibusdam repellendus vero sunt asperiores perferendis, consequatur fuga. Officiis, vero recusandae.</p>
+                            <div class="tecnologia">
+                                <h4>Tecnologia usada:</h4>
+                                <div class="etiquetas-tecnologias">
+                                    <p><i class="fa-brands fa-java"></i>Java</p>
+                                    <p><i class="fa-solid fa-database"></i></i>MySQL</p>
+                                </div>
+                            </div>
+                            <div class="container-btn-repo">
+                                <a target="_blank" href="https://github.com/" class="btn-repo">Github Repo</a>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+                <div data-categoria="desktop"  class="proyectos-targeta">
+                    <img src="targeta-aplicacion-escritorio.jpg" alt="cafeteria">
+                    <div class="texto-targeta-proyecto">
+                        
+                        <div class="contenido-scrolleable">
+                        <div class="titulo-fecha">
+                                <h3 class="titulo-targeta">Proyecto 4</h3>
+                                <p>2025</p>
+                        </div>
+                        <h4 class="especialidad">Desktop Software Service</h4>
+                            
+                        <p class="descripcion-targeta">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ipsum itaque ullam culpa animi maxime ducimus vero iste magni eum, veritatis illo inventore perferendis consequuntur ea aspernatur blanditiis quo? Sed? Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum eos voluptatibus facere quos. A quod sit, eum voluptates animi unde ullam sed eveniet placeat est qui architecto quasi facilis possimus?</p>
+                        <div class="tecnologia">
+                            <h4>Tecnologia usada:</h4>
+                            <div class="etiquetas-tecnologias">
+                                <p><i class="fa-brands fa-java"></i>Java</p>
+                                <p><i class="fa-solid fa-database"></i></i>PostgreSQL</p>
+                            </div>
+                        </div>
+                         <div class="container-btn-repo">
+                            <a target="_blank" href="https://github.com/" class="btn-repo">Github Repo</a>
+                        </div> 
+                    </div>
+                    </div>
+                </div>
+                <div data-categoria="web" class="proyectos-targeta">
+                    <img src="targeta-viajes.jpeg" alt="cafeteria">
+                    <div class="texto-targeta-proyecto">
+                        <div class="contenido-scrolleable">
+                        <div class="titulo-fecha">
+                                <h3 class="titulo-targeta">Proyecto 5</h3>
+                                <p>2024</p>
+                        </div>
+                        <h4 class="especialidad">Full Stack Service</h4>
+                            
+                        <p class="descripcion-targeta">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ipsum itaque ullam culpa animi maxime ducimus vero iste magni eum, veritatis illo inventore perferendis consequuntur ea aspernatur blanditiis quo? Sed? Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum eos voluptatibus facere quos. A quod sit, eum voluptates animi unde ullam sed eveniet placeat est qui architecto quasi facilis possimus?</p>
+                        <div class="tecnologia">
+                            <h4>Tecnologia usada:</h4>
+                            <div class="etiquetas-tecnologias">
+                                <p> <i class="fa-brands fa-html5"></i>html</p>
+                                <p> <i class="fa-brands fa-css3-alt"></i>css</p>
+                                <p><i class="fa-brands fa-js"></i>JavaScript</p>
+                                <p><i class="fa-solid fa-database"></i></i>PostgreSQL</p>
+                            </div>
+                        </div>
+                          <div class="container-btn-repo">
+                            <a target="_blank" href="https://github.com/" class="btn-repo">Github Repo</a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            
+        </section>
+        
+           
+    </main>
+    <!-- ========================= -->
+    <!-- Inicio del footer -->
+    <!-- ========================= -->
     <!--
-        Sección: Tarjetas de Proyectos
-
-        Descripción:
-        Este bloque de código HTML representa una galería de tarjetas de proyectos para un portafolio web.
-        Cada tarjeta muestra información relevante sobre un proyecto, incluyendo su imagen, título, fecha, especialidad, descripción y tecnologías utilizadas.
+        - Contenedor principal "container-footer" que agrupa todo el contenido del footer.
+        - Sección superior "footer-superior" dividida en:
+            - "container-mapa": Muestra la ubicación del usuario con un título y un contenedor para un mapa.
+            - "texto-footer": Incluye tres bloques:
+                - "footer-menu": Menú de navegación con enlaces a diferentes secciones de la página.
+                - "footer-contacto": Información de contacto (teléfono, dirección, correo electrónico) acompañada de íconos.
+                - "redes redes-footer": Enlaces a redes sociales con sus respectivos íconos.
+        - Sección inferior "footer-inferior" que muestra los derechos de autor.
     -->
-    <div class="proyectos-targetas">
-      <div data-categoria="web" class="proyectos-targeta">
-        <img src="targeta-cafe.jpg" alt="cafeteria">
-        <div class="texto-targeta-proyecto">
-          <div class="contenido-scrolleable">
-            <div class="titulo-fecha">
-              <h3 class="titulo-targeta">Proyecto 1</h3>
-              <p>2023-2024</p>
+    <footer>
+        <div class="container-footer">
+                <div class="footer-superior">
+                    <div class="container-mapa">
+                        <h3>Mi <span>ubicación</span></h3>
+                        <div id="map"></div>
+                    </div>
+                <div class="texto-footer">
+                    <div class="footer-menu">
+                        <h4>Menu</h4>
+                        <ul class="lista">
+                            <li>
+                                <a href="#">Index</a>
+                            </li>
+                            <li>
+                                <a href="/sobremi">Sobre mi</a>
+                            </li>
+                            <li>
+                                <a href="/Proyectos">Proyectos</a>
+                            </li>
+                            <li>
+                                <a href="/contacto"> contacto</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-contacto">
+                        <h4>Contacto</h4>
+                        <div class="contactos-list styleFooter-contacto"></div>
+                        
+                        
+                    </div>
+                    <div class="redes redes-footer">
+                        <h4>redes</h4>
+                        <div class="social-container style2"></div>
+                    </div>
+
+                    
+                </div>
             </div>
-            <h4 class="especialidad">Fronted Service</h4>
-            <p class="descripcion-targeta">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ipsum itaque ullam culpa animi maxime ducimus vero iste magni eum, veritatis illo inventore perferendis consequuntur ea aspernatur blanditiis quo? Sed? Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum eos voluptatibus facere quos. A quod sit, eum voluptates animi unde ullam sed eveniet placeat est qui architecto quasi facilis possimus?</p>
-            <div class="tecnologia">
-              <h4>Tecnologia usada:</h4>
-              <div class="etiquetas-tecnologias">
-                <p> <i class="fa-brands fa-html5"></i>html</p>
-                <p> <i class="fa-brands fa-css3-alt"></i>css</p>
-                <p><i class="fa-brands fa-js"></i>JavaScript</p>
-              </div>
+            <div class="footer-inferior">
+                <p class="copyright">
+                © Andres Garza | Todos los derechos reservados.
+                </p>
             </div>
-            <div class="container-btn-repo">
-              <a target="_blank" href="https://github.com/" class="btn-repo">Github Repo</a>
-            </div>
-          </div>
         </div>
-
-      </div>
-      <div data-categoria="web" class="proyectos-targeta">
-        <img src="targeta-app.jpg" alt="cafeteria">
-        <div class="texto-targeta-proyecto">
-          <div class="contenido-scrolleable">
-
-            <div class="titulo-fecha">
-              <h3 class="titulo-targeta">Proyecto 2</h3>
-              <p>2025</p>
-            </div>
-            <h4 class="especialidad">Full stack service</h4>
-
-            <p class="descripcion-targeta">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ipsum itaque ullam culpa animi maxime ducimus vero iste magni eum, veritatis illo inventore perferendis consequuntur ea aspernatur blanditiis quo? Sed? Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum eos voluptatibus facere quos. A quod sit, eum voluptates animi unde ullam sed eveniet placeat est qui architecto quasi facilis possimus?</p>
-            <div class="tecnologia">
-              <h4>Tecnologia usada:</h4>
-              <div class="etiquetas-tecnologias">
-                <p> <i class="fa-brands fa-vuejs"></i>vue.js</p>
-                <p> <i class="fa-brands fa-node"></i>Node.js</p>
-              </div>
-            </div>
-            <div class="container-btn-repo">
-              <a target="_blank" href="https://github.com/" class="btn-repo">Github Repo</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div data-categoria="movile" class="proyectos-targeta">
-        <img src="targeta-app-movile.png" alt="cafeteria">
-        <div class="texto-targeta-proyecto">
-          <div class="contenido-scrolleable">
-            <div class="titulo-fecha">
-              <h3 class="titulo-targeta">Proyecto 3</h3>
-              <p>2023-2024</p>
-            </div>
-            <h4 class="especialidad">Movile App Service</h4>
-
-            <p class="descripcion-targeta" >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem explicabo, aperiam aut sapiente nulla ut consectetur, eius at a quibusdam repellendus vero sunt asperiores perferendis, consequatur fuga. Officiis, vero recusandae.</p>
-            <div class="tecnologia">
-              <h4>Tecnologia usada:</h4>
-              <div class="etiquetas-tecnologias">
-                <p><i class="fa-brands fa-java"></i>Java</p>
-                <p><i class="fa-solid fa-database"></i></i>MySQL</p>
-              </div>
-            </div>
-            <div class="container-btn-repo">
-              <a target="_blank" href="https://github.com/" class="btn-repo">Github Repo</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div data-categoria="desktop"  class="proyectos-targeta">
-        <img src="targeta-aplicacion-escritorio.jpg" alt="cafeteria">
-        <div class="texto-targeta-proyecto">
-
-          <div class="contenido-scrolleable">
-            <div class="titulo-fecha">
-              <h3 class="titulo-targeta">Proyecto 4</h3>
-              <p>2025</p>
-            </div>
-            <h4 class="especialidad">Desktop Software Service</h4>
-
-            <p class="descripcion-targeta">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ipsum itaque ullam culpa animi maxime ducimus vero iste magni eum, veritatis illo inventore perferendis consequuntur ea aspernatur blanditiis quo? Sed? Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum eos voluptatibus facere quos. A quod sit, eum voluptates animi unde ullam sed eveniet placeat est qui architecto quasi facilis possimus?</p>
-            <div class="tecnologia">
-              <h4>Tecnologia usada:</h4>
-              <div class="etiquetas-tecnologias">
-                <p><i class="fa-brands fa-java"></i>Java</p>
-                <p><i class="fa-solid fa-database"></i></i>PostgreSQL</p>
-              </div>
-            </div>
-            <div class="container-btn-repo">
-              <a target="_blank" href="https://github.com/" class="btn-repo">Github Repo</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div data-categoria="web" class="proyectos-targeta">
-        <img src="targeta-viajes.jpeg" alt="cafeteria">
-        <div class="texto-targeta-proyecto">
-          <div class="contenido-scrolleable">
-            <div class="titulo-fecha">
-              <h3 class="titulo-targeta">Proyecto 5</h3>
-              <p>2024</p>
-            </div>
-            <h4 class="especialidad">Full Stack Service</h4>
-
-            <p class="descripcion-targeta">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ipsum itaque ullam culpa animi maxime ducimus vero iste magni eum, veritatis illo inventore perferendis consequuntur ea aspernatur blanditiis quo? Sed? Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum eos voluptatibus facere quos. A quod sit, eum voluptates animi unde ullam sed eveniet placeat est qui architecto quasi facilis possimus?</p>
-            <div class="tecnologia">
-              <h4>Tecnologia usada:</h4>
-              <div class="etiquetas-tecnologias">
-                <p> <i class="fa-brands fa-html5"></i>html</p>
-                <p> <i class="fa-brands fa-css3-alt"></i>css</p>
-                <p><i class="fa-brands fa-js"></i>JavaScript</p>
-                <p><i class="fa-solid fa-database"></i></i>PostgreSQL</p>
-              </div>
-            </div>
-            <div class="container-btn-repo">
-              <a target="_blank" href="https://github.com/" class="btn-repo">Github Repo</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-
-</main>
-<!-- ========================= -->
-<!-- Inicio del footer -->
-<!-- ========================= -->
-<!--
-    - Contenedor principal "container-footer" que agrupa todo el contenido del footer.
-    - Sección superior "footer-superior" dividida en:
-        - "container-mapa": Muestra la ubicación del usuario con un título y un contenedor para un mapa.
-        - "texto-footer": Incluye tres bloques:
-            - "footer-menu": Menú de navegación con enlaces a diferentes secciones de la página.
-            - "footer-contacto": Información de contacto (teléfono, dirección, correo electrónico) acompañada de íconos.
-            - "redes redes-footer": Enlaces a redes sociales con sus respectivos íconos.
-    - Sección inferior "footer-inferior" que muestra los derechos de autor.
--->
-<footer>
-  <div class="container-footer">
-    <div class="footer-superior">
-      <div class="container-mapa">
-        <h3>Mi <span>ubicación</span></h3>
-        <div id="map"></div>
-      </div>
-      <div class="texto-footer">
-        <div class="footer-menu">
-          <h4>Menu</h4>
-          <ul class="lista">
-            <li>
-              <a href="#">Index</a>
-            </li>
-            <li>
-              <a href="#sobremi">Sobre mi</a>
-            </li>
-            <li>
-              <a href="#Proyectos">Proyectos</a>
-            </li>
-            <li>
-              <a href="#contacto"> contacto</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="footer-contacto">
-          <h4>Contacto</h4>
-          <div class="footer-info">
-            <i class="fa-solid fa-phone"></i>
-            <p>+51 934 234 123</p>
-          </div>
-          <div class="footer-info">
-            <i class="fa-solid fa-location-dot"></i>
-            <p>calle 44, San Martin</p>
-          </div>
-          <div class="footer-info">
-            <i class="fa-solid fa-envelope"></i></i>
-            <p>micorreo@gmail.com</p>
-          </div>
-        </div>
-        <div class="redes redes-footer">
-          <h4>redes</h4>
-          <a href=""><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-          <a href="#"><i class="fab fa-github"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-        </div>
-
-
-      </div>
-    </div>
-    <div class="footer-inferior">
-      <p class="copyright">
-        © Andres Garza | Todos los derechos reservados.
-      </p>
-    </div>
-  </div>
-</footer>
-<script src="script.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDpLiSpzD3YXJeZf7flL7cQnBCKyygQSI&callback=initMap"></script>
+    </footer>
+    <script src="script.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDpLiSpzD3YXJeZf7flL7cQnBCKyygQSI&callback=initMap"></script>
 </body>
 </html>
