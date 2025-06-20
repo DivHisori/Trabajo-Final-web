@@ -15,6 +15,7 @@ public class Contacto {
     private String asunto;
     private int celular;
     private String mensaje;
+    //chow
 
     public Contacto(Long id, String nombre, String correo, String asunto, int celular, String mensaje) {
         this.id = id;
