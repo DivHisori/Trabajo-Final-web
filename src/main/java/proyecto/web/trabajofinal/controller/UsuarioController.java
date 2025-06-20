@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UsuarioController {
 
-    @GetMapping("/contacto")
-    public String contacto(){
-        return "contacto";
-    }
+
     @GetMapping("/index")
         public String index(){
             return"index";

@@ -1,4 +1,4 @@
-package proyecto.web.trabajofinal;
+package proyecto.web.trabajofinal.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
