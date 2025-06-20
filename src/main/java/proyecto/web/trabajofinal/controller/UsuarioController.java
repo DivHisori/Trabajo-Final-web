@@ -1,15 +1,13 @@
-package proyecto.web.trabajofinal;
+package proyecto.web.trabajofinal.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+//controlador para las referencias de acceso publico
 @Controller
 public class UsuarioController {
 
-    @GetMapping("/contacto")
-    public String contacto(){
-        return "contacto";
-    }
+
     @GetMapping("/index")
         public String index(){
             return"index";
@@ -22,8 +20,6 @@ public class UsuarioController {
     public String sobremi(){
         return "sobremi";
     }
-    @GetMapping("/editor")
-    public String editor(){
-        return "editor";
-    }
+
+
 }
