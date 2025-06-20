@@ -3,6 +3,7 @@ package proyecto.web.trabajofinal.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+//controlador para las referencias de acceso publico
 @Controller
 public class UsuarioController {
 

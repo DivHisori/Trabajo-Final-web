@@ -13,13 +13,11 @@ public class Login {
     private Long id;
     private String username;
     private String pass;
-    private String role;
 
     public Login(Long id, String name, String pass) {
         this.id = id;
         this.username = name;
         this.pass = pass;
-        this.role = "editor";
     }
 
     public Login() {
@@ -35,11 +33,11 @@ public class Login {
         return this;
     }
 
-    public String getusername() {
+    public String getUsername() {
         return username;
     }
 
-    public Login setusername(String name) {
+    public Login setUsername(String name) {
         this.username = name;
         return this;
     }

@@ -17,21 +17,17 @@ public class SecurityConfig {
         UserDetails editor = User.withDefaultPasswordEncoder()
                 .username("admin")
                 .password("admin")
+                .roles("EDITOR")
                 .build();
 
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("usuario")
-                .password("1234")
-                .build();
-
-        return new InMemoryUserDetailsManager(editor, user);
+        return new InMemoryUserDetailsManager(editor);
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/editor").hasRole("editor")
+                        .requestMatchers("/editor").hasRole("EDITOR")
                         .anyRequest().permitAll()
                 )
 
