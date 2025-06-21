@@ -26,4 +26,8 @@ public class UsuarioController {
     public String editor(){
         return "editor";
     }
+     @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 }
