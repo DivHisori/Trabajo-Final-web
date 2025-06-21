@@ -11,6 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+    //TODO: AGREGAR LOGOUT
 
     @Bean
     public UserDetailsService userDetailsService() {
