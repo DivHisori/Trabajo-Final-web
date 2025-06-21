@@ -668,9 +668,9 @@ function irAFormulario() {
 // Cargar los datos al cargar la página
 window.onload = cargarDatosEnTabla;
 
-//
-//
-//
+//======================================================
+//====================================================
+//==================================================
 
 function mostrarTarjetasSoloLectura(containerId) {
     const container = document.getElementById(containerId);
@@ -682,23 +682,27 @@ function mostrarTarjetasSoloLectura(containerId) {
     // Limpiamos el contenedor para evitar duplicados en recargas
     container.innerHTML = '';
 
-    const tarjetas = JSON.parse(localStorage.getItem('experiencias')) || [];
+    // Asegúrate de usar la clave correcta
+    const tarjetas = JSON.parse(localStorage.getItem('experiencia')) || [];
+
+    // Verifica si las tarjetas se están recuperando correctamente
+    console.log(tarjetas);
 
     if (tarjetas.length === 0) {
         container.innerHTML = '<p>No hay experiencias guardadas.</p>';
         return;
     }
 
-    tarjetas.forEach(({ fecha, titulo, institucion, descripcion }) => {
+    tarjetas.forEach(({ fecha, titulo, empresa, descripcion }) => {
         const tarjetaDiv = document.createElement('div');
         tarjetaDiv.className = 'timeline-item readonly-experience-card';
 
         tarjetaDiv.innerHTML = `
-      <h5 class="fecha-educacion"><strong>Fecha:</strong> ${fecha || 'No especificada'}</h5>
-      <h4><strong>Título:</strong> ${titulo || 'No especificado'}</h4>
-      <h5 class="institucion-educacion"><strong>Institución:</strong> ${institucion || 'No especificada'}</h5>
-      <p><strong>Descripción:</strong><br>${descripcion || 'No disponible'}</p>
-    `;
+            <h5 class="fecha-experiencia"><strong>Fecha:</strong> ${fecha || 'No especificada'}</h5>
+            <h4><strong>Título:</strong> ${titulo || 'No especificado'}</h4>
+            <h5 class="empresa-experiencia"><strong>Empresa:</strong> ${empresa || 'No especificada'}</h5>
+            <p><strong>Descripción:</strong><br>${descripcion || 'No disponible'}</p>
+        `;
 
         // Opcional: estilos por clase, sin inputs ni botones
         container.appendChild(tarjetaDiv);
@@ -709,6 +713,7 @@ function mostrarTarjetasSoloLectura(containerId) {
 document.addEventListener('DOMContentLoaded', () => {
     mostrarTarjetasSoloLectura('container-tarjetas-readonly');
 });
+
 
 
 
