@@ -35,7 +35,7 @@ header{
 }
 span{
     color: var(--primary-color);
-} 
+}  
 p{
     text-align: justify;
     font-size: 15px;
@@ -201,7 +201,7 @@ h5{
 }
 .logo:hover{
     transform: scale(1.1);
-    
+
 }
 .navbar{
     display: flex;
@@ -720,7 +720,7 @@ h5{
     gap: 20px;
     align-items: center;
     font-size: 0.9rem;
-    gap: 0.8rem; 
+    gap: 0.8rem;
 }
 .styleFooter-contacto .contact-title{
     display: none;
