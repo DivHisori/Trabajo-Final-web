@@ -406,7 +406,7 @@ function guardarCambios() {
 function generarIdUnico() {
     return Date.now().toString() + Math.floor(Math.random() * 1000).toString();
   }
-  
+  //elsa patito
   // -------------------- EDUCACIÓN --------------------
   
   // Agrega o renderiza una tarjeta de educación, asignando id (nuevo o existente)
