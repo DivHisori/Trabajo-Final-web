@@ -1,0 +1,27 @@
+use("admin"),db.getCollection("contacto").find({_id : ObjectId("6856e4f8861d00df8867bddd")})
+use("admin"),db.getCollection("contacto").find({_id : ObjectId("6856e607861d00df8867bde0")})
+use("admin"),db.getCollection("contacto").find({_id : ObjectId("6856e636861d00df8867bde2")})
+use("admin"),db.getCollection("contacto").find({_id : ObjectId("6856e641861d00df8867bde4")})
+
+
+
+use("admin");
+
+db.getCollection("contacto").insertMany([
+  {
+    nombreCompleto: "Carlos Ruiz",
+    numeroCelular: "+51991234567",
+    correoElectronico: "carlos.ruiz@otroejemplo.com",
+    asunto: "Solicitud de información",
+    mensaje: "Necesito un presupuesto para un proyecto web.",
+    fechaEnvio: new Date()
+  },
+  {
+    nombreCompleto: "María López",
+    numeroCelular: "+51987654321",
+    correoElectronico: "maria.lopez@ejemplo.net",
+    asunto: "Feedback",
+    mensaje: "Excelente servicio, ¡gracias!",
+    fechaEnvio: new Date()
+  }
+]);
