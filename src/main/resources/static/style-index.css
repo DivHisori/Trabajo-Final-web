@@ -302,7 +302,7 @@ h4{
     color: var(--text-color);
     margin-right: auto;
     transition: var(--transition);
-    display: inline-flex;
+    display: flex;
     gap: 0.5rem;
 }
 .logo h3{
