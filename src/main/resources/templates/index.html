@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <!--
     Portafolio web de Andres Garza.
-
     Este documento HTML contiene la estructura y el contenido del portafolio, incluyendo secciones para presentación, proyectos y contacto.
     Utiliza CSS para el estilo y JavaScript para la interactividad.
     El portafolio incluye un menú de navegación, una sección de presentación con foto y descripción, una sección de proyectos con tarjetas, y un pie de página con información de contacto y redes sociales.
@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style-index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -23,245 +23,217 @@
 <!-- Inicio del body -->
 <!-- ========================= -->
 <body>
-<!--
-    Contenedor de personalización de color para el portafolio web.
-    Incluye:
-    - Un botón (ícono de lápiz) que abre un menú desplegable para seleccionar colores.
-    - El menú desplegable contiene varios botones circulares, cada uno representando un color diferente.
-    - Cada botón de color tiene un atributo 'data-color' con el valor hexadecimal del color correspondiente.
--->
-<div class="container-color-botones">
-    <a class="boton-personalizacion-color" aria-expanded="false" aria-controls="menu-colores" title="Abrir selector de colores"><i class="fa-solid fa-pen" ></i></a>
-    <div class="menu-desplegable-colores" id="menu-colores" role="menu" aria-hidden="true" tabindex="-1">
-        <button class="circulo-color"  data-color="#e93535" role="listitem"></button>
-        <button class="circulo-color" data-color="#00cc00" role="listitem"></button>
-        <button class="circulo-color" data-color="#ff5e00" role="listitem"></button>
-        <button class="circulo-color" data-color="#23a7ff" role="listitem"></button>
-        <button class="circulo-color" data-color="#9900ff" role="listitem"></button>
-    </div>
-</div>
-<button id="color-toggle-btn" aria-label="Cambiar colores de fondo y texto" aria-pressed="false" type="button">
-    <i id="icon-sun" class="fa-solid fa-sun" style="display: inline-block;"></i>
-    <i id="icon-moon" class="fa-solid fa-moon" style="display: none;"></i>
-</button>
-
-<!-- ========================= -->
-<!-- Inicio del header -->
-<!-- ========================= -->
-<header>
     <!--
-    Contiene el logo con enlace a la página principal, un botón para abrir el menú en dispositivos móviles
-    y una barra de navegación con enlaces a las secciones principales del portafolio: Inicio, Sobre mí, Proyectos y Contacto.
+        Contenedor de personalización de color para el portafolio web.
+        Incluye:
+        - Un botón (ícono de lápiz) que abre un menú desplegable para seleccionar colores.
+        - El menú desplegable contiene varios botones circulares, cada uno representando un color diferente.
+        - Cada botón de color tiene un atributo 'data-color' con el valor hexadecimal del color correspondiente.
     -->
-    <div class="container-header">
-
-        <a href="index.html" class="logo">Andres <span>Garza</span> </a>
-
-        <button class="btn-menu" aria-label="Abrir menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-        <nav class="navbar">
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
+    <div class="container-color-botones">
+        <a class="boton-personalizacion-color" aria-expanded="false" aria-controls="menu-colores" title="Abrir selector de colores"><i class="fa-solid fa-pen" ></i></a>
+        <div class="menu-desplegable-colores" id="menu-colores" role="menu" aria-hidden="true" tabindex="-1">
+            <button class="circulo-color"  data-color="#e93535" role="listitem"></button>
+            <button class="circulo-color" data-color="#00cc00" role="listitem"></button>
+            <button class="circulo-color" data-color="#ff5e00" role="listitem"></button>
+            <button class="circulo-color" data-color="#23a7ff" role="listitem"></button>
+            <button class="circulo-color" data-color="#9900ff" role="listitem"></button>
+        </div>
+    </div>
+    <button id="color-toggle-btn" aria-label="Cambiar colores de fondo y texto" aria-pressed="false" type="button">
+        <i id="icon-sun" class="fa-solid fa-sun" style="display: inline-block;"></i>
+        <i id="icon-moon" class="fa-solid fa-moon" style="display: none;"></i>
+</button>
+    
+    <!-- ========================= -->
+    <!-- Inicio del header -->
+    <!-- ========================= -->
+    <header>
+        <!--
+        Contiene el logo con enlace a la página principal, un botón para abrir el menú en dispositivos móviles
+        y una barra de navegación con enlaces a las secciones principales del portafolio: Inicio, Sobre mí, Proyectos y Contacto.
+        -->
+        <div class="container-header">
+            
+            <a href="/index" class="logo"><h3 class="nombre-display">Andres</h3><span class="apellido-display">Garza</span> </a>
+            
+            <button class="btn-menu" aria-label="Abrir menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
                 <li><a href="/sobremi">Sobre mí</a></li>
                 <li><a href="/proyectos">Proyectos</a></li>
-                <li><a href="/contacto">Contacto</a></li>
-                 <li><a href="/login">Login</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
-<!-- ========================= -->
-<!-- Inicio de la sección principal del portafolio. -->
-<!-- ========================= -->
-<main>
-    <!--
-        Contiene una presentación con una foto, una breve descripción, enlaces a redes sociales y botones para descargar el CV y contactar.
-    -->
-    <section class="principal"id="inicio">
-        <div class="container-principal">
-            <div class="foto foto-banner">
-                <img id="profile-image" class="mifoto shared-profile-image" src="Link.jpg" alt="mifoto">
+                <li><a th:href="@{/contacto}">Contacto</a></li>
+                </ul>   
+            </nav>
+        </div>        
+    </header>
+    <!-- ========================= -->
+    <!-- Inicio de la sección principal del portafolio. -->
+    <!-- ========================= -->
+    <main>
+        <!--
+            Contiene una presentación con una foto, una breve descripción, enlaces a redes sociales y botones para descargar el CV y contactar.
+        -->
+        <section class="principal"id="inicio">
+            <div class="container-principal">
+                <div class="foto foto-banner">
+                    <img class="mifoto imagen-cambiada" src="Link.jpg" alt="mifoto">
+                    
+                </div>
+                <div class="descripcion-principal">
+                    <div class="texto-descripcion">
+                        <h1 class="texto-ascendente-principal">Hola, <br>mi nombre es <span class="nombre-display">Andres</span></h1>
+                        <br>
+                        <h3 class="texto-animado texto-ascendente-principal">Soy <span></span></h3>
+                        <br>
+                        <p class="texto-ascendente-principal descripcion-display">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias sit ut culpa voluptatum minima officiis quo eaque, nemo itaque doloremque sunt perspiciatis vitae quasi natus odio id eum tempora veniam?</p>
 
-            </div>
-            <div class="descripcion-principal">
-                <div class="texto-descripcion">
-                    <h1 class="texto-ascendente-principal">Hola, <br>mi nombre es <span>Andres</span></h1>
-                    <br>
-                    <h3 class="texto-animado texto-ascendente-principal">Soy <span></span></h3>
-                    <br>
-                    <p class="texto-ascendente-principal"> Polleria Francis </p>
-                    <div class="redes principal-redes texto-ascendente-principal">
-                        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/DivHisori/Trabajo-Final-web" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://x.com/" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-                    </div>
-                    <div class="btns texto-ascendente-principal">
-                        <a href="CV-Profesional.pdf" download="CV-Profesional.pdf" class="btn-general btn-color btn-principal"> Descargar CV</a>
-                        <a href="#contacto" class="btn-general btn-oscuro btn-principal"> Contactar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--
-        Sección "Sobre mí".
-        Contiene una breve descripción personal y un enlace para leer más sobre el autor.
-        Incluye una imagen representativa del autor.
-    -->
-    <section class="sobremi" id="sobremi">
-        <div class="container-sobremi">
-            <div class="descripcion-sobremi">
-                <div class="texto-sobremi">
-                    <h2 class="texto-ascendente-sobremi">Sobre <span>mi</span></h2>
-                    <br>
-                    <p class="texto-ascendente-sobremi">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi illum fugit voluptatibus quidem quas quisquam suscipit deleniti ad repellat sapiente maiores doloremque eaque distinctio, quia eos aperiam ratione iste voluptatum.</p>
-                    <div class="texto-ascendente-sobremi">
-                        <a href="/sobremi" class="btn-general btn-color btn-sobremi">Leer más</a>
-                    </div>
+                        <div class="social-container style1 texto-ascendente-principal"></div>
 
+                        <div class="btns texto-ascendente-principal">
+                            <a href="#" class="open-cv btn-general btn-color btn-principal"> Descargar CV</a>
+                            <a href="#contacto" class="btn-general btn-oscuro btn-principal"> Contactar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </section>
+        <!--
+            Sección "Sobre mí".
+            Contiene una breve descripción personal y un enlace para leer más sobre el autor.
+            Incluye una imagen representativa del autor.
+        -->
+        <section class="sobremi" id="sobremi">
+            <div class="container-sobremi">
+                <div class="descripcion-sobremi">
+                    <div class="texto-sobremi">
+                        <h2 class="texto-ascendente-sobremi">Sobre <span>mi</span></h2>
+                        <br>
+                        <p class="texto-ascendente-sobremi descripcion-display">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi illum fugit voluptatibus quidem quas quisquam suscipit deleniti ad repellat sapiente maiores doloremque eaque distinctio, quia eos aperiam ratione iste voluptatum.</p>
+                        <div class="texto-ascendente-sobremi">
+                            <a href="/sobremi" class="btn-general btn-color btn-sobremi">Leer más</a>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="foto foto-sobremi">
+                    <img class="mifoto imagen-cambiada" src="Link.jpg" alt="mifoto">
                 </div>
             </div>
-            <div class="foto foto-sobremi">
-                <img id="profile-image" class="mifoto shared-profile-image" src="Link.jpg" alt="mifoto">
-            </div>
-        </div>
-    </section >
-    <!--
-        Sección de proyectos.
-        Contiene una lista de tarjetas que representan diferentes proyectos, cada una con una imagen, título, descripción y un enlace al repositorio de GitHub.
-    -->
-    <section class="proyectos" id="proyectos">
-        <div class="container-proyectos">
-            <h2 class="texto-proyectos anima-proyec">Mis <span>Proyectos</span></h2>
-            <div class="targetas">
-                <div class="targeta anima-proyec">
-                    <img src="targeta-cafe.jpg" alt="cafeteria">
-                    <div class="texto-targeta">
-                        <h3 class="titulo-targeta">Proyecto 1</h3>
-                        <p class="descripcion-targeta">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ipsum itaque ullam culpa animi maxime ducimus vero iste magni eum, veritatis illo inventore perferendis consequuntur ea aspernatur blanditiis quo? Sed?</p>
-                        <a target="_blank" href="https://github.com/DivHisori/" class="btn-general btn-color btn-targeta">Github Repo</a>
+        </section >
+        <!--
+            Sección de proyectos.
+            Contiene una lista de tarjetas que representan diferentes proyectos, cada una con una imagen, título, descripción y un enlace al repositorio de GitHub.
+        -->
+        <section class="proyectos" id="proyectos">
+            <div class="container-proyectos">
+                <h2 class="texto-proyectos anima-proyec">Mis <span>Proyectos</span></h2>
+                <div class="targetas">
+                    <div class="targeta anima-proyec">
+                        <img src="targeta-cafe.jpg" alt="cafeteria">
+                        <div class="texto-targeta">
+                            <h3 class="titulo-targeta">Proyecto 1</h3>
+                            <p class="descripcion-targeta">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ipsum itaque ullam culpa animi maxime ducimus vero iste magni eum, veritatis illo inventore perferendis consequuntur ea aspernatur blanditiis quo? Sed?</p>
+                            <a target="_blank" href="https://github.com/" class="btn-general btn-color btn-targeta">Github Repo</a>
+                        </div>
                     </div>
-                </div>
-                <div class="targeta anima-proyec">
-                    <img src="targeta-app.jpg" alt="servicios">
-                    <div class="texto-targeta">
-                        <h3 class="titulo-targeta">Proyecto 2</h3>
-                        <p class="descripcion-targeta">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ipsum itaque ullam culpa animi maxime ducimus vero iste magni eum, veritatis illo inventore perferendis consequuntur ea aspernatur blanditiis quo? Sed?</p>
-                        <a target="_blank" href="https://github.com/DivHisori/" class="btn-general btn-color btn-targeta">Github Repo</a>
+                    <div class="targeta anima-proyec">
+                        <img src="targeta-app.jpg" alt="servicios">
+                        <div class="texto-targeta">
+                            <h3 class="titulo-targeta">Proyecto 2</h3>
+                            <p class="descripcion-targeta">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ipsum itaque ullam culpa animi maxime ducimus vero iste magni eum, veritatis illo inventore perferendis consequuntur ea aspernatur blanditiis quo? Sed?</p>
+                            <a target="_blank" href="https://github.com/" class="btn-general btn-color btn-targeta">Github Repo</a>
+                        </div>
                     </div>
-                </div>
-                <div class="targeta anima-proyec">
-                    <img src="targeta-app-movile.png" alt="floreria">
-                    <div class="texto-targeta">
-                        <h3 class="titulo-targeta">Proyecto 3</h3>
-                        <p class="descripcion-targeta">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ipsum itaque ullam culpa animi maxime ducimus vero iste magni eum, veritatis illo inventore perferendis consequuntur ea aspernatur blanditiis quo? Sed?</p>
-                        <a target="_blank" href="https://github.com/" class="btn-general btn-color btn-targeta">Github Repo</a>
-                    </div>
+                    <div class="targeta anima-proyec">
+                        <img src="targeta-app-movile.png" alt="floreria">
+                        <div class="texto-targeta">
+                            <h3 class="titulo-targeta">Proyecto 3</h3>
+                            <p class="descripcion-targeta">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ipsum itaque ullam culpa animi maxime ducimus vero iste magni eum, veritatis illo inventore perferendis consequuntur ea aspernatur blanditiis quo? Sed?</p>
+                            <a target="_blank" href="https://github.com/" class="btn-general btn-color btn-targeta">Github Repo</a>
+                        </div>
                 </div>
             </div>
             <div class="container-ver-mas anima-proyec"><a href="/proyectos" class="ver-mas">Más proyectos<i class="fa-solid fa-arrow-right"></i></a>
             </div>
+            
+            
+        </section>
 
-
-    </section>
     <!--
         Sección de contacto.
         Contiene información de contacto como teléfono, dirección de oficina y correo electrónico.
         Incluye un botón para contactar al autor.
     -->
-    <section class="contacto" id="contacto">
-        <h2 class="texto-contacto texto-ascendente-contacto"> Contacta <span>Conmigo</span></h2>
-        <div class="container-informacion">
-            <div class="texto-info texto-ascendente-contacto">
-                <i class="fa-solid fa-phone"></i>
-                <h3 class="titulo-info">Teléfono</h3>
-                <p>+51 934 234 123</p>
-            </div>
-            <div class="texto-info texto-ascendente-contacto">
-                <i class="fa-solid fa-location-dot"></i>
-                <h3 class="titulo-info">Oficina</h3>
-                <p>calle 44, San Martin</p>
-            </div>
-            <div class="texto-info texto-ascendente-contacto">
-                <i class="fa-solid fa-envelope"></i></i>
-                <h3 class="titulo-info">Correo</h3>
-                <p>micorreo@gmail.com</p>
-            </div>
-        </div>
-        <div class="btns texto-ascendente-contacto">
-            <a href="/contacto" class="btn-general btn-color btn-contacto ">Contactame</a>
-        </div>
+        <section class="contacto" id="contacto">
+            <h2 class="texto-contacto texto-ascendente-contacto"> Contacta <span>Conmigo</span></h2>
+            <div class="container-informacion">
+                <div class="contactos-list style1-contacto">
 
-    </section>
-</main>
-<!--
-    Pie de página del sitio web.
-    Contiene un mapa interactivo, un menú con enlaces a las secciones principales, información de contacto y enlaces a redes sociales.
-    Incluye un aviso de derechos de autor.
--->
-<footer>
-    <div class="container-footer">
-        <div class="footer-superior">
-            <div class="container-mapa">
-                <h3>Mi <span>ubicación</span></h3>
-                <div id="map"></div>
-            </div>
-            <div class="texto-footer">
-                <div class="footer-menu">
-                    <h4>Menu</h4>
-                    <ul class="lista">
-                        <li>
-                            <a href="#">Index</a>
-                        </li>
-                        <li>
-                            <a href="#sobremi">Sobre mi</a>
-                        </li>
-                        <li>
-                            <a href="#Proyectos">Proyectos</a>
-                        </li>
-                        <li>
-                            <a href="#contacto"> contacto</a>
-                        </li>
-                    </ul>
                 </div>
-
-                <div class="footer-contacto">
-                    <h4>Contacto</h4>
-                    <div class="footer-info">
-                        <i class="fa-solid fa-phone"></i>
-                        <p>+51 934 234 123</p>
-                    </div>
-                    <div class="footer-info">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <p>calle 44, San Martin</p>
-                    </div>
-                    <div class="footer-info">
-                        <i class="fa-solid fa-envelope"></i></i>
-                        <p>micorreo@gmail.com</p>
-                    </div>
-                </div>
-                <div class="redes redes-footer">
-                    <h4>redes</h4>
-                    <a href=""><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/DivHisori/"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-
-
             </div>
-        </div>
-        <div class="footer-inferior">
-            <p class="copyright">
+            <div class="btns texto-ascendente-contacto">
+                <a href="/contacto" class="btn-general btn-color btn-contacto ">Contactame</a>
+            </div>
+            
+        </section> 
+    </main>
+    <!--
+        Pie de página del sitio web.
+        Contiene un mapa interactivo, un menú con enlaces a las secciones principales, información de contacto y enlaces a redes sociales.
+        Incluye un aviso de derechos de autor.
+    -->
+    <footer>
+        <div class="container-footer">
+                <div class="footer-superior">
+                    <div class="container-mapa">
+                        <h3>Mi <span>ubicación</span></h3>
+                        <div id="map"></div>
+                    </div>
+                <div class="texto-footer">
+                    <div class="footer-menu">
+                        <h4>Menu</h4>
+                        <ul class="lista">
+                            <li>
+                                <a href="/index">Inicio</a>
+                            </li>
+                            <li>
+                                <a href="/sobremi">Sobre mi</a>
+                            </li>
+                            <li>
+                                <a href="/Proyectos">Proyectos</a>
+                            </li>
+                            <li>
+                                <a href="/contacto"> contacto</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-contacto">
+                        <h4>Contacto</h4>
+                        <div class="styleFooter-contacto otra-lista"></div>
+                    </div>
+
+                    <div class="redes redes-footer">
+                        <h4>redes</h4>
+                        <div class="social-container style2"></div>
+                    </div>
+                    
+
+                    
+                </div>
+            </div>
+            <div class="footer-inferior">
+                <p class="copyright">
                 © Andres Garza | Todos los derechos reservados.
-            </p>
-            <a href="/editor" class="btn-editar"><i class="fa-solid fa-gear"></i></a>
+                </p>
+                <a href="/editor" class="btn-editar"><i class="fa-solid fa-gear"></i></a>
+            </div>
         </div>
-    </div>
-</footer>
-<script src="/script.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDpLiSpzD3YXJeZf7flL7cQnBCKyygQSI&callback=initMap"></script>
+    </footer>
+    <script src="script.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDpLiSpzD3YXJeZf7flL7cQnBCKyygQSI&callback=initMap"></script>
+    
 </body>
 </html>
