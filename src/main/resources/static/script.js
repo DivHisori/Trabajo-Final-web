@@ -1,19 +1,117 @@
 
-function updateProfileImages() {
-    const savedImage = localStorage.getItem('sharedProfileImage');
-    if (savedImage) {
-        const imgs = document.querySelectorAll('.shared-profile-image');
-        imgs.forEach(img => {
-            img.src = savedImage;
-        });
-    }
-}
-window.addEventListener('load', updateProfileImages);
-window.addEventListener('storage', (event) => {
-    if (event.key === 'sharedProfileImage') {
-        updateProfileImages();
-    }
+//==========================================================
+//=================cargar-cv================================
+//========================================================== 
+// Obtener todos los enlaces con la clase 'open-cv'
+const cvLinks = document.querySelectorAll('.open-cv');
+cvLinks.forEach(link => {
+    link.onclick = function (event) {
+        event.preventDefault(); // Prevenir el comportamiento por defecto del enlace
+        const uploadedCV = localStorage.getItem('uploadedCV');
+        if (uploadedCV) {
+            // Crear un Blob a partir del Data URL
+            const byteString = atob(uploadedCV.split(',')[1]); // Decodificar base64
+            const mimeString = uploadedCV.split(',')[0].split(':')[1].split(';')[0]; // Obtener el tipo MIME
+            const ab = new ArrayBuffer(byteString.length);
+            const ia = new Uint8Array(ab);
+            for (let i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            const blob = new Blob([ab], { type: mimeString });
+            const blobUrl = URL.createObjectURL(blob);
+            // Abrir el Blob en una nueva pestaña
+            const newWindow = window.open(blobUrl, '_blank');
+            if (!newWindow) {
+                alert('Por favor, permite las ventanas emergentes para abrir el CV.');
+            }
+        } else {
+            alert('No hay CV guardado. Por favor, sube un CV primero.');
+        }
+    };
 });
+//---------------recuperar-redes sociales-------------
+// Cargar redes sociales desde localStorage y renderizar
+function renderSocialLinks() {
+    const socialListData = JSON.parse(localStorage.getItem('socialList')) || [];
+    const socialContainers = document.querySelectorAll('.social-container'); // Selecciona todos los contenedores con la clase social-container
+    socialContainers.forEach(container => {
+        // Limpiar el contenedor antes de agregar nuevos íconos
+        container.innerHTML = '';
+        socialListData.forEach(item => {
+            const socialCircle = document.createElement('a');
+            socialCircle.href = item.link;
+            socialCircle.target = '_blank';
+            socialCircle.classList.add('social-circle');
+            const icon = document.createElement('i');
+            icon.className = item.social; // Usar la clase de Font Awesome
+            socialCircle.appendChild(icon);
+            container.appendChild(socialCircle);
+        });
+    });
+}
+// Llama a la función para renderizar los íconos en todos los contenedores con la clase social-container
+renderSocialLinks();
+
+
+//---------- Recuperar el nombre guardado---------------------
+const savedNombre = localStorage.getItem('nombre');
+if (savedNombre) {
+    // Mostrar el nombre en todos los h3 con la clase 'nombre-display'
+    const nombreDisplays = document.querySelectorAll('.nombre-display');
+    nombreDisplays.forEach(element => {
+        element.textContent = `${savedNombre}`;
+    });
+} else {
+    console.log('No se encontró el nombre guardado.');
+}
+//--------------Recuperar el apellido guardado------------
+const savedApellido = localStorage.getItem('apellido');
+if (savedApellido) {
+    // Mostrar el apellido en todos los h3 con la clase 'apellido-display'
+    const apellidoDisplays = document.querySelectorAll('.apellido-display');
+    apellidoDisplays.forEach(element => {
+        element.textContent = `${savedApellido}`;
+    });
+} else {
+    console.log('No se encontró el apellido guardado.');
+}
+//------------Recuperar la descripción guardada--------------
+const savedDescripcion = localStorage.getItem('descripcion');
+if (savedDescripcion) {
+    const descripcionDisplays = document.querySelectorAll('.descripcion-display');
+    descripcionDisplays.forEach(element => {
+        element.textContent = `${savedDescripcion}`;
+    });
+} else {
+    console.log('No se encontró la descripción guardada.');
+}
+//=============================================================
+//============Cargar-Descricion-porquecontratarme==============
+//=============================================================
+// Cargar la descripción desde localStorage
+const savedDescripcion2 = localStorage.getItem('porqueContratarme');
+if (savedDescripcion2) {
+    const descripcionDisplays2 = document.querySelectorAll('.porque-contratarme-parrafo');
+    descripcionDisplays2.forEach(element => {
+        element.textContent = savedDescripcion2; // Reemplaza el contenido de cada párrafo
+    });
+} else {
+    console.log('No se encontró la descripción guardada.');
+}
+//=============================================================
+//============Cargar-Descricion-TrabajemosJuntos==============
+//=============================================================
+// Cargar la descripción desde localStorage
+const savedDescripcion3 = localStorage.getItem('TrabajemosJuntos');
+if (savedDescripcion3) {
+    const descripcionDisplays3 = document.querySelectorAll('.trabajemo-juntos-parrafo');
+    descripcionDisplays3.forEach(element => {
+        element.textContent = savedDescripcion3; // Reemplaza el contenido de cada párrafo
+    });
+} else {
+    console.log('No se encontró la descripción guardada.');
+}
+
 /*------------------------------------------------------*/
 const contenedorBotones = document.querySelector('.container-color-botones');
 const btnPersonalizar = document.querySelector('.boton-personalizacion-color');
@@ -99,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll('.proyectos-targeta');
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if(entry.isIntersecting){
+            if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             }
             else {
@@ -116,11 +214,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /*--------------animation-main-----------------*/
 
-document.addEventListener("DOMContentLoaded", () =>{
+document.addEventListener("DOMContentLoaded", () => {
     const secciones = document.querySelectorAll('.mifoto');
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if(entry.isIntersecting){
+            if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             }
             else {
@@ -159,12 +257,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-document.addEventListener("DOMContentLoaded", () =>{
+document.addEventListener("DOMContentLoaded", () => {
     const verMas = document.querySelectorAll('.ver-mas');
 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if(entry.isIntersecting){
+            if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             }
             else {
@@ -359,136 +457,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 /*------------------------------------------------*/
 /* ----------------cargar-imagen-------------------*/
-/* ----------------cargar-imagen-------------------*/
-(() => {
-    const imageUploadInput = document.getElementById('image-upload');
-    const imageUploadCircle = document.querySelector('.image-upload-circle');
-    const imagePreview = document.querySelector('.image-preview');
-    const btnRemove = document.querySelector('.btn-remove');
-    const btnRotate = document.querySelector('.btn-rotate');
-    const form = document.getElementById('data-form');
+/*--------------------------------------------------------- */
 
-    let currentRotation = 0;
-    let currentImageDataUrl = '';
-
-    // Función para cargar imagen y mostrar preview
-    function loadImage(file) {
-        if (!file.type.startsWith('image/')) {
-            alert('Por favor, selecciona un archivo de imagen válido.');
-            return;
-        }
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            currentImageDataUrl = e.target.result;
-            imagePreview.src = currentImageDataUrl;
-            imagePreview.style.display = 'block';
-            imagePreview.style.transform = 'rotate(0deg)';
-            currentRotation = 0;
-            imageUploadCircle.classList.add('has-image');
-        };
-        reader.readAsDataURL(file);
-    }
-
-    // Evento cambio input file
-    imageUploadInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            loadImage(file);
-        }
+const savedImage = localStorage.getItem('uploadedImage');
+const images = document.querySelectorAll('.imagen-cambiada');
+if (savedImage) {
+    images.forEach(img => {
+        img.src = savedImage; // Cambiar la fuente de cada imagen con la clase "imagen-cambiada"
     });
+}
 
-    // Manejo drag and drop en el label (círculo)
-    imageUploadCircle.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        imageUploadCircle.style.borderColor = '#06b6d4';
-    });
-
-    imageUploadCircle.addEventListener('dragleave', (e) => {
-        e.preventDefault();
-        imageUploadCircle.style.borderColor = '';
-    });
-
-    imageUploadCircle.addEventListener('drop', (e) => {
-        e.preventDefault();
-        imageUploadCircle.style.borderColor = '';
-        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-            loadImage(e.dataTransfer.files[0]);
-        }
-    });
-
-    // Botón eliminar imagen
-    btnRemove.addEventListener('click', (e) => {
-        e.preventDefault();
-        imageUploadInput.value = '';
-        imagePreview.src = '';
-        imagePreview.style.display = 'none';
-        imageUploadCircle.classList.remove('has-image');
-        currentImageDataUrl = '';
-        currentRotation = 0;
-    });
-
-    // Botón girar imagen
-    btnRotate.addEventListener('click', (e) => {
-        e.preventDefault();
-        currentRotation = (currentRotation + 90) % 360;
-        imagePreview.style.transform = `rotate(${currentRotation}deg)`;
-    });
-
-    // Guardar al presionar "Guardar"
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        if (!currentImageDataUrl) {
-            alert('Por favor, sube una imagen antes de guardar.');
-            return;
-        }
-
-        // Crear canvas para girar imagen y obtener dataURL rotada
-        const img = new Image();
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-
-            // Ajustamos canvas según rotación
-            if (currentRotation % 180 === 0) {
-                canvas.width = img.width;
-                canvas.height = img.height;
-            } else {
-                canvas.width = img.height;
-                canvas.height = img.width;
-            }
-
-            // Movemos y rotamos contexto
-            ctx.translate(canvas.width / 2, canvas.height / 2);
-            ctx.rotate(currentRotation * Math.PI / 180);
-            ctx.drawImage(img, -img.width / 2, -img.height / 2);
-
-            // Obtenemos la imagen rotada en base64
-            const rotatedDataUrl = canvas.toDataURL('image/png');
-
-            // Guardamos en localStorage para que otros HTML puedan acceder
-            localStorage.setItem('sharedProfileImage', rotatedDataUrl);
-            alert('Imagen guardada con éxito.');
-
-            // Disparar evento personalizado para que otras ventanas capturen el cambio (si están abiertas)
-            window.dispatchEvent(new Event('storage'));
-        };
-        img.src = currentImageDataUrl;
-    });
-
-    // Inicialización: Al cargar, si ya hay imagen guardada mostrar en preview (opcional)
-    function init() {
-        const savedImage = localStorage.getItem('sharedProfileImage');
-        if (savedImage) {
-            imagePreview.src = savedImage;
-            imagePreview.style.display = 'block';
-            imageUploadCircle.classList.add('has-image');
-            currentImageDataUrl = savedImage;
-            currentRotation = 0;
-        }
-    }
-
-    init();
-})();
 
 
 /*-------------boton-menu-header---------------------*/
@@ -506,7 +484,7 @@ btnMenu.addEventListener('click', () => {
 });
 
 window.addEventListener('resize', () => {
-    if(window.innerWidth > 800) {
+    if (window.innerWidth > 800) {
         menu.classList.remove('show');
         btnMenu.setAttribute('aria-expanded', 'false');
         icono.classList.remove('fa-x');
@@ -548,9 +526,9 @@ botonesFiltro.forEach(boton => {
         const filtro = boton.getAttribute('data-filtro');
 
         proyectos.forEach(proyecto => {
-            if(filtro === 'todos') {
+            if (filtro === 'todos') {
                 proyecto.style.display = 'flex';
-            }else{
+            } else {
                 if (proyecto.getAttribute('data-categoria') === filtro) {
                     proyecto.style.display = 'flex';
                 } else {
@@ -581,26 +559,162 @@ resumeBtn.forEach((boton, idx) => {
     });
 });
 
-/*------------------------------------------------------*/
 
-const btn = document.getElementById('button-form');
+//============================================================
+//==============cargar-informacionDeContacto====================
+//============================================================
+// Cargar contactos desde localStorage al cargar la página
+window.onload = function () {
+    const contactos = JSON.parse(localStorage.getItem('contactos')) || {};
 
-document.getElementById('form')
-    .addEventListener('submit', function(event) {
-        event.preventDefault();
+    // Cargar en la primera lista
+    for (const [key, value] of Object.entries(contactos)) {
+        crearContactoElemento(key, value);
+    }
+    // Cargar en la segunda lista
+    const otraLista = document.querySelector('.otra-lista');
+    for (const [key, value] of Object.entries(contactos)) {
+        crearContactoElementoEnOtraLista(key, value, otraLista);
+    }
+};
+function crearContactoElemento(tipo, dato, contenedor) {
+    const contactoDiv = document.createElement('div');
+    contactoDiv.className = 'contact-box';
 
-        btn.value = 'Enviando...';
+    const titulos = {
+        telefono: 'Número de Teléfono',
+        ubicacion: 'Ubicación',
+        correo: 'Correo Electrónico'
+    };
 
-        const serviceID = 'default_service';
-        const templateID = 'template_zvpqnho';
+    let icono;
+    switch (tipo) {
+        case 'telefono':
+            icono = '<i class="fas fa-phone"></i>';
+            break;
+        case 'Ubicacion':
+            icono = '<i class="fa-solid fa-location-dot"></i>';
+            break;
+        case 'correo':
+            icono = '<i class="fas fa-envelope"></i>';
+            break;
+        default:
+            icono = '';
+    }
 
-        emailjs.sendForm(serviceID, templateID, this)
-            .then(() => {
-                btn.value = 'Enviar mensaje';
-                alert('Mensaje enviado correctamente!');
-            }, (err) => {
-                btn.value = 'Enviar Mensaje';
-                alert(JSON.stringify(err));
-            });
+    contactoDiv.innerHTML = `
+        ${icono}
+        <div class="todo-texto-contacto">
+            <h4 class="contact-title">${titulos[tipo] || tipo.charAt(0).toUpperCase() + tipo.slice(1)}:</h4>
+            <p>${dato}</p>
+        </div>
+    `;
+
+    contenedor.appendChild(contactoDiv);
+}
+
+function cargarContactos() {
+    const contactos = JSON.parse(localStorage.getItem('contactos')) || {};
+
+    const contactosList = document.querySelector('.contactos-list');
+    if (contactosList) {
+        for (const [key, value] of Object.entries(contactos)) {
+            crearContactoElemento(key, value, contactosList);
+        }
+    }
+
+    const otraLista = document.querySelector('.otra-lista');
+    if (otraLista) {
+        for (const [key, value] of Object.entries(contactos)) {
+            crearContactoElemento(key, value, otraLista);
+        }
+    }
+}
+
+window.onload = cargarContactos;
+
+
+
+
+
+
+
+//=============================================================
+//=======================Cargar-tabla-sobremi==================
+//=============================================================
+// Función para cargar los datos en la tabla desde localStorage
+function cargarDatosEnTabla() {
+    document.getElementById('titulo-nacimiento').textContent = localStorage.getItem('titulo1') || "Campo 1:";
+    document.getElementById('nacimiento').textContent = localStorage.getItem('entrada1') || "Sin dato";
+    document.getElementById('titulo-edad').textContent = localStorage.getItem('titulo2') || "Campo 2:";
+    document.getElementById('edad').textContent = localStorage.getItem('entrada2') || "Sin dato";
+    document.getElementById('titulo-pais-nacimiento').textContent = localStorage.getItem('titulo3') || "Campo 3:";
+    document.getElementById('pais-nacimiento').textContent = localStorage.getItem('entrada3') || "Sin dato";
+    document.getElementById('titulo-nombre').textContent = localStorage.getItem('titulo4') || "Campo 4:";
+    document.getElementById('nombre').textContent = localStorage.getItem('entrada4') || "Sin dato";
+    document.getElementById('titulo-grado-academico').textContent = localStorage.getItem('titulo5') || "Campo 5:";
+    document.getElementById('grado-academico').textContent = localStorage.getItem('entrada5') || "Sin dato";
+    document.getElementById('titulo-nacionalidad').textContent = localStorage.getItem('titulo6') || "Campo 6:";
+    document.getElementById('nacionalidad').textContent = localStorage.getItem('entrada6') || "Sin dato";
+    document.getElementById('titulo-residencia').textContent = localStorage.getItem('titulo7') || "Campo 7:";
+    document.getElementById('residencia').textContent = localStorage.getItem('entrada7') || "Sin dato";
+    document.getElementById('titulo-freelance').textContent = localStorage.getItem('titulo8') || "Campo 8:";
+    document.getElementById('freelance').textContent = localStorage.getItem('entrada8') || "Sin dato";
+}
+// Función para ir al formulario
+function irAFormulario() {
+    window.location.href = 'formulario.html'; // Cambia 'formulario.html' por el nombre de tu archivo de formulario
+}
+// Cargar los datos al cargar la página
+window.onload = cargarDatosEnTabla;
+
+//======================================================
+//====================================================
+//==================================================
+
+function mostrarTarjetasSoloLectura(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) {
+        console.warn(`Contenedor con id "${containerId}" no encontrado.`);
+        return;
+    }
+
+    // Limpiamos el contenedor para evitar duplicados en recargas
+    container.innerHTML = '';
+
+    // Asegúrate de usar la clave correcta
+    const tarjetas = JSON.parse(localStorage.getItem('experiencia')) || [];
+
+    // Verifica si las tarjetas se están recuperando correctamente
+    console.log(tarjetas);
+
+    if (tarjetas.length === 0) {
+        container.innerHTML = '<p>No hay experiencias guardadas.</p>';
+        return;
+    }
+
+    tarjetas.forEach(({ fecha, titulo, empresa, descripcion }) => {
+        const tarjetaDiv = document.createElement('div');
+        tarjetaDiv.className = 'timeline-item readonly-experience-card';
+
+        tarjetaDiv.innerHTML = `
+            <h5 class="fecha-experiencia"><strong>Fecha:</strong> ${fecha || 'No especificada'}</h5>
+            <h4><strong>Título:</strong> ${titulo || 'No especificado'}</h4>
+            <h5 class="empresa-experiencia"><strong>Empresa:</strong> ${empresa || 'No especificada'}</h5>
+            <p><strong>Descripción:</strong><br>${descripcion || 'No disponible'}</p>
+        `;
+
+        // Opcional: estilos por clase, sin inputs ni botones
+        container.appendChild(tarjetaDiv);
     });
+}
+
+// Ejecutar al cargar DOM y pasar el id del contenedor objetivo
+document.addEventListener('DOMContentLoaded', () => {
+    mostrarTarjetasSoloLectura('container-tarjetas-readonly');
+});
+
+
+
+
 
