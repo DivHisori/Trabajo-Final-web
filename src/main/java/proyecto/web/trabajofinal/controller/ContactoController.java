@@ -16,11 +16,7 @@ public class ContactoController {
         model.addAttribute("contacto", contacto);
         return "contacto";
     }
-    private String nombre;
-    private String correo;
-    private String asunto;
-    private int celular;
-    private String mensaje;
+
 
     //para enviar los datos
     @PostMapping("/registrar")
