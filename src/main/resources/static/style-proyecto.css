@@ -35,7 +35,7 @@ header{
 }
 span{
     color: var(--primary-color);
-}
+} 
 p{
     text-align: justify;
     font-size: 15px;
@@ -80,6 +80,7 @@ h5{
     transform: scale(1.3);
 }
 
+
 /*----------fin redes sociales-------*/
 
 /*-------------boton-colores-----------------*/
@@ -111,11 +112,11 @@ h5{
 }
 .boton-personalizacion-color:active{
     transform: scale(0.95);
-
+    
 }
 .circulo-color{
     border: 2px solid transparent;
-
+    
     width: 2rem;
     height: 2rem;
     cursor: pointer;
@@ -124,10 +125,10 @@ h5{
     position: relative;
 }
 .circulo-color:nth-child(1) { background-color: #e93535; }
-.circulo-color:nth-child(2) { background-color: #00cc00; }
-.circulo-color:nth-child(3) { background-color: #ff5e00; }
-.circulo-color:nth-child(4) { background-color: #23a7ff; }
-.circulo-color:nth-child(5) { background-color: #9900ff; }
+  .circulo-color:nth-child(2) { background-color: #00cc00; }
+  .circulo-color:nth-child(3) { background-color: #ff5e00; }
+  .circulo-color:nth-child(4) { background-color: #23a7ff; }
+  .circulo-color:nth-child(5) { background-color: #9900ff; }
 
 .menu-desplegable-colores{
     display: none;
@@ -135,13 +136,13 @@ h5{
     background-color:var(--color-fondo-boton);
     border-radius: 50px;
     padding: 0.25rem;
-}
+}  
 .menu-desplegable-colores.show {
-    display: flex;
+    display: flex; 
     flex-direction: row;
     gap: 0.4rem;
 
-
+    
 }
 /*-------------boton-dia-noche-----------------*/
 #color-toggle-btn {
@@ -191,10 +192,16 @@ h5{
     color: var(--text-color);
     margin-right: auto;
     transition: var(--transition);
+    display: inline-flex;
+    gap: 0.5rem;
+}
+.logo h3{
+    font-size: 2rem;
+    transition: var(--transition);
 }
 .logo:hover{
     transform: scale(1.1);
-
+    
 }
 .navbar{
     display: flex;
@@ -218,7 +225,7 @@ h5{
     border-bottom: 0.19rem solid var(--primary-color);
     text-shadow: 0 0 0.63rem var(--primary-color);
     transform: scale(1.2);
-
+    
 }
 .btn-menu{
     display: none;
@@ -231,7 +238,6 @@ h5{
     color: var(--primary-color);
     cursor: pointer;
 }
-
 /*------------------------------*/
 /*--------fin Header---------*/
 /*------------------------------*/
@@ -254,9 +260,9 @@ h5{
 }
 #filtros {
     text-align: center;
-
-}
-#filtros button {
+    
+  }
+  #filtros button {
     background-color: var(--primary-color);
     border: none;
     color: white;
@@ -267,29 +273,29 @@ h5{
     cursor: pointer;
     border: 2px solid var(--primary-color);
     transition: background-color 0.3s ease;
-}
-#filtros button:hover {
+  }
+  #filtros button:hover {
     background-color: var(--background-color);
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
-}
-#filtros button.active {
+  }
+  #filtros button.active {
     background-color: var(--background-color);
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
-}
+  }
 .proyectos-targetas{
-
+    
     width: 90%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     margin-top: 1rem;
-
+    
 }
 .proyectos-targeta{
     position: relative;
-
+    
 }
 .texto-targeta-proyecto {
     opacity: 0;
@@ -302,7 +308,7 @@ h5{
     flex-direction: column;
     justify-content: center;
     color: #0f0f0f;
-    padding: 0 2rem;
+    padding: 0 2rem; 
     background: var(--primary-color);
     transition: all 0.5s ease;
 }
@@ -317,12 +323,12 @@ h5{
     padding-left: 0.5rem;
     display: flex;
     flex-direction: column;
-
+    
 }
 
 
 .proyectos-targeta:hover .texto-targeta-proyecto {
-    opacity: 1;
+  opacity: 1;
 
 }
 .proyectos-targeta{
@@ -335,7 +341,7 @@ h5{
     padding: 1rem 1rem;
     display: flex;
 
-}
+}  
 .titulo-fecha{
     display: flex;
     justify-content: space-between;
@@ -352,13 +358,13 @@ h5{
 }
 
 .proyectos-targeta:hover img {
-    opacity: 0;
-}
+      opacity: 0;
+    }
 
 .etiquetas-tecnologias{
     display: flex;
     flex-wrap: wrap;
-
+    
 }
 .etiquetas-tecnologias p i{
     padding: 0px 5px 0px 0px;
@@ -375,7 +381,7 @@ h5{
 }
 .proyectos-targeta.visible:hover{
     background-color: var(--primary-color);
-
+    
 }
 .proyectos-targeta:hover .etiquetas-tecnologias{
     color: var(--primary-color);
@@ -395,11 +401,11 @@ h5{
     transition: var(--transition);
 
     border: 2px solid transparent;
-
+    
 }
 .btn-repo:hover{
     transform: scale(1.03);
-
+    
 }
 .container-btn-repo{
     display: flex;
@@ -411,10 +417,10 @@ h5{
     transform: scale(1.1);
 }
 .proyectos-targeta:hover .btn-repo{
-
+    
     background-color: #0f0f0f;
     color: var(--primary-color);
-
+    
 }
 .texto-ascendente-principal {
     opacity: 0;
@@ -427,7 +433,7 @@ h5{
     transform: translateY(0);
 }
 
-
+  
 /*------------------------------*/
 /*-------fin Main-------*/
 /*------------------------------*/
@@ -474,15 +480,15 @@ h5{
     flex-direction: row;
     justify-content: space-between;
     align-items:start;
-
+    
 }
 .footer-menu{
     padding: 2.5rem ;
-
+    
 }
 .footer-contacto{
     padding: 2.5rem;
-
+    
 }
 .redes-footer{
     padding: 2.5rem;
@@ -490,7 +496,7 @@ h5{
 .lista {
     display: flex;
     flex-direction: column;
-
+    
 }
 .lista li{
     display: inline-block;
@@ -530,7 +536,7 @@ h5{
     display: flex;
     justify-content: center;
     align-items: center;
-
+    
     background-color: var(--background-color);
 }
 .copyright{
@@ -553,6 +559,9 @@ h5{
     .logo{
         font-size: 20px;
     }
+    .logo h3{
+        font-size: 20px;
+    }
 }
 @media (max-width: 910px){
     .proyectos-targeta{
@@ -572,24 +581,24 @@ h5{
 }
 
 @media (max-width: 630px) {
-    .container-mapa{
+     .container-mapa{
         width: 100%;
         border: none;
-    }
-    .texto-footer{
+     }
+     .texto-footer{
         width: 100%;
-    }
+     }
 }
 
 @media (max-width: 1300px) {
     .targetas{
         grid-template-columns: repeat(2, 1fr);
     }
-
+    
 }
 
 @media(max-width:1070px){
-
+    
     .descripcion-sobremi, .foto, .descripcion{
         width: 100%;
     }
@@ -609,7 +618,7 @@ h5{
     .container-mapa{
         width: 60%;
     }
-
+    
 }
 
 
@@ -625,9 +634,9 @@ h5{
         border-left: 2px solid var(--primary-color);
         border-bottom: 2px solid var(--primary-color);
         border-right: 2px solid var(--primary-color);
-        border-bottom-left-radius: 2rem;
-        border-bottom-right-radius: 2rem;
-        display: none;
+         border-bottom-left-radius: 2rem;
+         border-bottom-right-radius: 2rem;
+         display: none;
     }
     .navbar ul{
         width: 100%;
@@ -643,14 +652,14 @@ h5{
     }
 
     .navbar.show {
-        display: flex;
-        max-height: 500px;
+      display: flex;
+      max-height: 500px; 
     }
     .navbar ul li a:hover{
-        color: var(--primary-color);
-        border-bottom: 0.19rem solid var(--primary-color);
-        text-shadow: 0 0 0.63rem var(--primary-color);
-        transform: scale(1.08);
+    color: var(--primary-color);
+    border-bottom: 0.19rem solid var(--primary-color);
+    text-shadow: 0 0 0.63rem var(--primary-color);
+    transform: scale(1.08);
     }
 }
 @media (max-width: 1200px) {
@@ -660,7 +669,7 @@ h5{
 }
 
 @media(max-width:800px){
-
+    
     .targetas-sobremi {
         grid-template-columns: repeat(1, 1fr);
     }
@@ -668,7 +677,7 @@ h5{
 @media(max-width:476px){
     .celdas-tabla tr td{
         display: flex;
-    }
+    } 
     .btn-sobremi-descripcion{
         display: flex;
         align-items: center;
@@ -681,20 +690,49 @@ h5{
     }
 }
 @media (max-width: 630px) {
-    .container-mapa{
+     .container-mapa{
         width: 100%;
         border: none;
-    }
-    .texto-footer{
+     }
+     .texto-footer{
         width: 100%;
-    }
-    .footer-superior{
+     }
+     .footer-superior{
         flex-direction: column;
-    }
-    .container-mapa{
+     }
+     .container-mapa{
         width: auto;
     }
     .texto-footer{
         width: auto;
     }
+}
+
+.styleFooter-contacto{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+    padding-top: 0.5rem;
+}
+.styleFooter-contacto .contact-box{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    font-size: 0.9rem;
+    gap: 0.8rem;
+}
+.styleFooter-contacto .contact-title{
+    display: none;
+}
+.style1-contacto .contact-box i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: var(--secundary-background-color);
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
 }
