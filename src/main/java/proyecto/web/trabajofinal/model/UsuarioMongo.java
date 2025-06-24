@@ -1,19 +1,21 @@
 package proyecto.web.trabajofinal.model;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import org.springframework.data.annotation.Id; // Importa la anotación Id de Spring Data
 import org.springframework.data.mongodb.core.mapping.Document; // Anotación para indicar que es un documento de MongoDB
 import org.springframework.data.mongodb.core.mapping.Field; // Para mapear el nombre del campo si es diferente
 
 import java.time.LocalDate; // Ojo: MongoDB guarda fechas como Date, no LocalDate directamente sin conversión
 
-@Document(collection = "usuarios") // <-- ¡Cambio aquí! Esto mapea la clase a la colección 'usuarios' en MongoDB
-public class UsuarioDB {
+@Document(collection = "Usuarios") // <-- ¡Cambio aquí! Esto mapea la clase a la colección 'usuarios' en MongoDB
+public class UsuarioMongo {
 
     @Id // <-- ¡Cambio aquí! Esta es la anotación de ID para MongoDB.
-        // MongoDB autogenera un ObjectId si no lo provees
+    //MongoDB autogenera un ObjectId si no lo provees
     private String id; // <-- El ID de MongoDB es un String (ObjectId por defecto)
 
-    private String nombre;
+    public String nombre;
 
     @Field("correo_electronico") // <-- Opcional: Mapea 'correoElectronico' a 'correo_electronico' en MongoDB
     private String correoElectronico;
@@ -21,11 +23,15 @@ public class UsuarioDB {
     @Field("celular") // <-- Opcional: Mapea 'celular' a 'celular' en MongoDB
     private String celular;
 
+    private String asunto;
+
+    private String mensaje;
+
     @Field("fecha_registro") // <-- Opcional: Mapea 'fechaRegistro' a 'fecha_registro' en MongoDB
     private LocalDate fechaRegistro; // MongoDB guarda Date, así que Spring Data hará la conversión
 
     // Constructor vacío (necesario para Spring Data)
-    public UsuarioDB() {
+    public UsuarioMongo() {
     }
 
     // Getters y Setters (Mantén estos, pero actualiza el id)
@@ -59,6 +65,23 @@ public class UsuarioDB {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+    public String getAsunto() {
+        return asunto;
+    }
+
+    public UsuarioMongo setAsunto(String asunto) {
+        this.asunto = asunto;
+        return this;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public UsuarioMongo setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+        return this;
     }
 
     public LocalDate getFechaRegistro() {

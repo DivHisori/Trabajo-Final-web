@@ -61,19 +61,19 @@
             <div class="container-formulario">
               <div class="fondo-formulario">
                 <h3 class="texto-ascendente-sobremi">Enviame un <span>correo</span></h3>
-                <form method="post" id="form" th:action="@{/registrar}" th:object="${contacto}">
+                <form method="post" id="form" th:action="@{/registrar}" th:object="${usuarioMongo}">
                   <div class="input-grupo">
                     <div class="input-caja">
-                      <input type="text" placeholder="Nombre Completo" name="nombre" class="texto-ascendente-sobremi" th:field="*{nombre}" required="required">
-                      <input type="email" placeholder="Correo Electronico" name="correo-electronico" class="texto-ascendente-sobremi" th:field="*{correo}" required="required">
+                      <input type="text" placeholder="Nombre Completo" class="texto-ascendente-sobremi" th:field="*{nombre}" required="required">
+                      <input type="email" placeholder="Correo Electronico" name="correo-electronico" class="texto-ascendente-sobremi" th:field="*{correoElectronico}" required="required">
                     </div>
                     <div class="input-caja">
                       <input type="number" placeholder="Numero de celular" name="celular" class="texto-ascendente-sobremi"  th:field="*{celular}" required="required">
-                      <input type="text" placeholder="Asunto" name="asunto" class="texto-ascendente-sobremi"  th:field="*{asunto}"required="required">
+                      <input type="text" placeholder="Asunto" name="asunto" class="texto-ascendente-sobremi"  th:field="*{asunto}" required="required">
                     </div>
                   </div>
                   <div class="input-grupo-2">
-                    <textarea name="" id="" cols="30" rows="10" placeholder="Escribe tu mensaje aqui>" class="texto-ascendente-sobremi"  th:field="*{mensaje}" required="required"></textarea>
+                    <textarea name="" id="" cols="30" rows="10" placeholder="Escribe tu mensaje aqui" class="texto-ascendente-sobremi"  th:field="*{mensaje}" required="required"></textarea>
                     <div class="texto-ascendente-sobremi">
                       <input id="button-form" type="submit" value="Send Message" class="btn-general btn-color btn-enviar ">
                     </div>
