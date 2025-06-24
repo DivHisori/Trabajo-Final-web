@@ -2,7 +2,7 @@ package proyecto.web.trabajofinal.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import proyecto.web.trabajofinal.repository.UsuarioRepositoryDB;
+import proyecto.web.trabajofinal.repository.UsuarioRepositoryMongo;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,10 +12,10 @@ import java.util.Optional;
 public class UsuarioService {
 
     @Autowired // Inyecta automáticamente el repositorio de usuarios
-    private UsuarioRepositoryDB usuarioRepository;
+    private UsuarioRepositoryMongo usuarioRepository;
 
     // Método para guardar un nuevo usuario
-    public UsuarioDB guardarUsuario(UsuarioDB usuario) {
+    public UsuarioMongo guardarUsuario(UsuarioMongo usuario) {
         if (usuario.getFechaRegistro() == null) {
             usuario.setFechaRegistro(LocalDate.now()); // Establece la fecha de registro si no está definida
         }
@@ -23,17 +23,17 @@ public class UsuarioService {
     }
 
     // Método para encontrar un usuario por su ID
-    public Optional<UsuarioDB> obtenerUsuarioPorId(String id) {
+    public Optional<UsuarioMongo> obtenerUsuarioPorId(String id) {
         return usuarioRepository.findById(id);
     }
 
     // Método para encontrar un usuario por correo electrónico
-    public UsuarioDB obtenerUsuarioPorCorreo(String correo) {
+    public UsuarioMongo obtenerUsuarioPorCorreo(String correo) {
         return usuarioRepository.findByCorreoElectronico(correo);
     }
 
     // Método para obtener todos los usuarios
-    public List<UsuarioDB> obtenerTodosLosUsuarios() {
+    public List<UsuarioMongo> obtenerTodosLosUsuarios() {
         return usuarioRepository.findAll();
     }
 

@@ -8,7 +8,7 @@ import proyecto.web.trabajofinal.model.Contacto;
 
 @Controller
 public class ContactoController {
-
+/*
     //capturar los datos
     @GetMapping("/contacto")
     public String contacto(Model model) {
@@ -33,4 +33,6 @@ public class ContactoController {
         System.out.println("c_mensaje: " + contacto.getMensaje());
         return "contacto";
     }
+
+ */
 }
