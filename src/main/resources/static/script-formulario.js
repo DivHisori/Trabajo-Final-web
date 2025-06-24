@@ -599,4 +599,183 @@ function generarIdUnico() {
     }
     cargarTarjetasExperiencia();
   });
-  
+
+//
+//
+//
+// ============ FUNCIÓN PARA AGREGAR TARJETA PROYECTO ============
+function agregarTarjetaProyecto(imagen = "", titulo = "", fecha = "", servicio = "", descripcion = "", tecnologias = "", link = "", id = null) {
+    const container = document.getElementById('container-tarjetas-proyectos');
+    const tarjetaId = id || generarIdUnico(); // Usa la misma función de ID único
+
+    const tarjetaDiv = document.createElement('div');
+    tarjetaDiv.className = 'tarjeta-proyecto';
+    tarjetaDiv.dataset.id = tarjetaId;
+
+    tarjetaDiv.innerHTML = `
+    <div class="form-group">
+      <label for="imagen-${tarjetaId}">Imagen:</label>
+      <input type="file" id="imagen-${tarjetaId}" class="input-imagen" accept="image/*">
+      ${imagen ? `<img src="${imagen}" alt="Preview" class="preview-imagen">` : ''}
+    </div>
+    <div class="form-group">
+      <label for="titulo-${tarjetaId}">Título:</label>
+      <input type="text" id="titulo-${tarjetaId}" class="input-titulo" value="${titulo}" placeholder="Título del proyecto" required>
+    </div>
+    <div class="form-group">
+      <label for="fecha-${tarjetaId}">Fecha:</label>
+      <input type="text" id="fecha-${tarjetaId}" class="input-fecha" value="${fecha}" placeholder="Ej: 2020-2022" required>
+    </div>
+    <div class="form-group">
+      <label for="servicio-${tarjetaId}">Servicio:</label>
+      <input type="text" id="servicio-${tarjetaId}" class="input-servicio" value="${servicio}" placeholder="Ej: Desarrollo Web" required>
+    </div>
+    <div class="form-group">
+      <label for="descripcion-${tarjetaId}">Descripción:</label>
+      <textarea id="descripcion-${tarjetaId}" class="input-descripcion" required>${descripcion}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="tecnologiasc-${tarjetaId}">Tecnologías:</label>
+      <select id="tecnologias-${tarjetaId}" class="input-tecnologias">
+        <option value="">Selecciona una tecnología</option>
+        <option value="Chow">chow</option>
+        <!-- Opciones se cargarán desde localStorage (implementar luego) -->
+        aasd
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="link-${tarjetaId}">Enlace:</label>
+      <input type="text" id="link-${tarjetaId}" class="input-link" value="${link}" placeholder="https://...">
+    </div>
+    <div class="botones-tarjeta">
+      <button class="btn-guardar" data-id="${tarjetaId}">Guardar</button>
+      <button class="btn-eliminar" data-id="${tarjetaId}">Eliminar</button>
+    </div>
+  `;
+
+    container.appendChild(tarjetaDiv);
+
+    // Evento para previsualizar imagen al subirla
+    const imagenInput = tarjetaDiv.querySelector(`#imagen-${tarjetaId}`);
+    const preview = tarjetaDiv.querySelector('.preview-imagen') || null;
+
+    imagenInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                if (!preview) {
+                    const imgPreview = document.createElement('img');
+                    imgPreview.className = 'preview-imagen';
+                    imgPreview.src = event.target.result;
+                    imagenInput.parentNode.appendChild(imgPreview);
+                } else {
+                    preview.src = event.target.result;
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+}
+// ============ GUARDAR PROYECTO ============
+function guardarProyecto(tarjetaId) {
+    const tarjeta = document.querySelector(`.tarjeta-proyecto[data-id="${tarjetaId}"]`);
+
+    const imagenInput = tarjeta.querySelector('.input-imagen');
+    const preview = tarjeta.querySelector('.preview-imagen');
+    const titulo = tarjeta.querySelector('.input-titulo').value.trim();
+    const fecha = tarjeta.querySelector('.input-fecha').value.trim();
+    const servicio = tarjeta.querySelector('.input-servicio').value.trim();
+    const descripcion = tarjeta.querySelector('.input-descripcion').value.trim();
+    const tecnologias = tarjeta.querySelector('.input-tecnologias').value;
+    const link = tarjeta.querySelector('.input-link').value.trim();
+
+    // Validar campos
+    if (!titulo || !fecha || !servicio || !descripcion || !tecnologias) {
+        alert("Completa los campos obligatorios (*).");
+        return;
+    }
+
+    // Crear objeto proyecto
+    const proyecto = { titulo, fecha, servicio, descripcion, tecnologias, link };
+
+    // Guardar imagen si se subió una nueva
+    if (imagenInput.files.length > 0) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            proyecto.imagen = e.target.result;
+            guardarEnLocalStorage(proyecto, tarjetaId);
+        };
+        reader.readAsDataURL(imagenInput.files[0]);
+    } else if (preview) {
+        proyecto.imagen = preview.src;
+        guardarEnLocalStorage(proyecto, tarjetaId);
+    } else {
+        guardarEnLocalStorage(proyecto, tarjetaId);
+    }
+}
+
+// Función auxiliar para guardar en localStorage
+function guardarEnLocalStorage(proyecto, tarjetaId) {
+    let proyectos = JSON.parse(localStorage.getItem('proyectos')) || [];
+    const existe = proyectos.findIndex(p => p.id === tarjetaId);
+
+    proyecto.id = tarjetaId;
+
+    if (existe !== -1) {
+        proyectos[existe] = proyecto; // Actualizar
+    } else {
+        proyectos.push(proyecto); // Agregar nuevo
+    }
+
+    localStorage.setItem('proyectos', JSON.stringify(proyectos));
+    alert("Proyecto guardado.");
+}
+
+// ============ ELIMINAR PROYECTO ============
+function eliminarProyecto(tarjetaId) {
+    let proyectos = JSON.parse(localStorage.getItem('proyectos')) || [];
+    proyectos = proyectos.filter(p => p.id !== tarjetaId);
+    localStorage.setItem('proyectos', JSON.stringify(proyectos));
+
+    document.querySelector(`.tarjeta-proyecto[data-id="${tarjetaId}"]`).remove();
+    alert("Proyecto eliminado.");
+}
+// ============ CARGAR PROYECTOS AL INICIAR ============
+function cargarProyectos() {
+    const proyectos = JSON.parse(localStorage.getItem('proyectos')) || [];
+    const container = document.getElementById('container-tarjetas-proyectos');
+    if (container) container.innerHTML = ''; // Limpiar
+
+    proyectos.forEach(proyecto => {
+        agregarTarjetaProyecto(
+            proyecto.imagen,
+            proyecto.titulo,
+            proyecto.fecha,
+            proyecto.servicio,
+            proyecto.descripcion,
+            proyecto.tecnologias,
+            proyecto.link,
+            proyecto.id
+        );
+    });
+}
+
+// ============ EVENTOS ============
+document.addEventListener('DOMContentLoaded', cargarProyectos);
+
+// Agregar nueva tarjeta al hacer clic
+document.getElementById('agregar-tarjeta-proyecto').addEventListener('click', () => {
+    agregarTarjetaProyecto();
+});
+
+// Manejador delegado para guardar/eliminar
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn-guardar')) {
+        guardarProyecto(e.target.dataset.id);
+    } else if (e.target.classList.contains('btn-eliminar')) {
+        if (confirm("¿Eliminar proyecto?")) {
+            eliminarProyecto(e.target.dataset.id);
+        }
+    }
+});

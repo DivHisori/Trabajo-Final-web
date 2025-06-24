@@ -671,48 +671,48 @@ window.onload = cargarDatosEnTabla;
 //======================================================
 //====================================================
 //==================================================
+// Función para cargar tarjetas de educación
+function cargarTarjetasEducacion() {
+    const container = document.getElementById('container-tarjetas-educacion');
+    const educacion = JSON.parse(localStorage.getItem('educacion')) || [];
 
-function mostrarTarjetasSoloLectura(containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) {
-        console.warn(`Contenedor con id "${containerId}" no encontrado.`);
-        return;
-    }
-
-    // Limpiamos el contenedor para evitar duplicados en recargas
-    container.innerHTML = '';
-
-    // Asegúrate de usar la clave correcta
-    const tarjetas = JSON.parse(localStorage.getItem('experiencia')) || [];
-
-    // Verifica si las tarjetas se están recuperando correctamente
-    console.log(tarjetas);
-
-    if (tarjetas.length === 0) {
-        container.innerHTML = '<p>No hay experiencias guardadas.</p>';
-        return;
-    }
-
-    tarjetas.forEach(({ fecha, titulo, empresa, descripcion }) => {
-        const tarjetaDiv = document.createElement('div');
-        tarjetaDiv.className = 'timeline-item readonly-experience-card';
-
-        tarjetaDiv.innerHTML = `
-            <h5 class="fecha-experiencia"><strong>Fecha:</strong> ${fecha || 'No especificada'}</h5>
-            <h4><strong>Título:</strong> ${titulo || 'No especificado'}</h4>
-            <h5 class="empresa-experiencia"><strong>Empresa:</strong> ${empresa || 'No especificada'}</h5>
-            <p><strong>Descripción:</strong><br>${descripcion || 'No disponible'}</p>
+    educacion.forEach(item => {
+        const tarjeta = document.createElement('div');
+        tarjeta.className = 'tarjeta';
+        tarjeta.innerHTML = `
+            <h3>${item.titulo}</h3>
+            <p><strong>Institución:</strong> ${item.institucion}</p>
+            <p><strong>Fecha:</strong> ${item.fecha}</p>
+            <p><strong>Descripción:</strong> ${item.descripcion}</p>
         `;
-
-        // Opcional: estilos por clase, sin inputs ni botones
-        container.appendChild(tarjetaDiv);
+        container.appendChild(tarjeta);
     });
 }
 
-// Ejecutar al cargar DOM y pasar el id del contenedor objetivo
+// Función para cargar tarjetas de experiencia
+function cargarTarjetasExperiencia() {
+    const container = document.getElementById('container-tarjetas-experiencia');
+    const experiencia = JSON.parse(localStorage.getItem('experiencia')) || [];
+
+    experiencia.forEach(item => {
+        const tarjeta = document.createElement('div');
+        tarjeta.className = 'tarjeta';
+        tarjeta.innerHTML = `
+            <h3>${item.titulo}</h3>
+            <p><strong>Empresa:</strong> ${item.empresa}</p>
+            <p><strong>Fecha:</strong> ${item.fecha}</p>
+            <p><strong>Descripción:</strong> ${item.descripcion}</p>
+        `;
+        container.appendChild(tarjeta);
+    });
+}
+
+// Cargar datos al iniciar la página
 document.addEventListener('DOMContentLoaded', () => {
-    mostrarTarjetasSoloLectura('container-tarjetas-readonly');
+    cargarTarjetasEducacion();
+    cargarTarjetasExperiencia();
 });
+
 
 
 
