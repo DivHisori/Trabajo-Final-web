@@ -35,7 +35,7 @@ header{
 }
 span{
     color: var(--primary-color);
-} 
+}  
 p{
     text-align: justify;
     font-size: 15px;
@@ -201,7 +201,7 @@ h5{
 }
 .logo:hover{
     transform: scale(1.1);
-    
+
 }
 .navbar{
     display: flex;

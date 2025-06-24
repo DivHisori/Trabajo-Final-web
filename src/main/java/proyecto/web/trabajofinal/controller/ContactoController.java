@@ -8,7 +8,7 @@ import proyecto.web.trabajofinal.model.Contacto;
 
 @Controller
 public class ContactoController {
-
+/*
     //capturar los datos
     @GetMapping("/contacto")
     public String contacto(Model model) {
@@ -16,11 +16,7 @@ public class ContactoController {
         model.addAttribute("contacto", contacto);
         return "contacto";
     }
-    private String nombre;
-    private String correo;
-    private String asunto;
-    private int celular;
-    private String mensaje;
+
 
     //para enviar los datos
     @PostMapping("/registrar")
@@ -37,4 +33,6 @@ public class ContactoController {
         System.out.println("c_mensaje: " + contacto.getMensaje());
         return "contacto";
     }
+
+ */
 }

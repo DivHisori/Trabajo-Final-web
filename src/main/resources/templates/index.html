@@ -30,6 +30,7 @@
         - El menú desplegable contiene varios botones circulares, cada uno representando un color diferente.
         - Cada botón de color tiene un atributo 'data-color' con el valor hexadecimal del color correspondiente.
     -->
+
     <div class="container-color-botones">
         <a class="boton-personalizacion-color" aria-expanded="false" aria-controls="menu-colores" title="Abrir selector de colores"><i class="fa-solid fa-pen" ></i></a>
         <div class="menu-desplegable-colores" id="menu-colores" role="menu" aria-hidden="true" tabindex="-1">
@@ -61,6 +62,7 @@
             <nav class="navbar">
                 <ul>
                     <li><a href="#inicio">Inicio</a></li>
+
                 <li><a href="/sobremi">Sobre mí</a></li>
                 <li><a href="/proyectos">Proyectos</a></li>
                 <li><a th:href="@{/contacto}">Contacto</a></li>
@@ -155,7 +157,7 @@
                         </div>
                 </div>
             </div>
-            <div class="container-ver-mas anima-proyec"><a href="/proyectos" class="ver-mas">Más proyectos<i class="fa-solid fa-arrow-right"></i></a>
+            <div class="container-ver-mas anima-proyec"><a href="proyectos.html" class="ver-mas">Más proyectos<i class="fa-solid fa-arrow-right"></i></a>
             </div>
             
             
