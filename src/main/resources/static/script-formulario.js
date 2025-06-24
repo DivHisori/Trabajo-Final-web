@@ -405,7 +405,7 @@ function guardarCambios() {
 // Genera un id único sencillo para cada tarjeta
 function generarIdUnico() {
     return Date.now().toString() + Math.floor(Math.random() * 1000).toString();
-  }
+}
   //elsa patito
   // -------------------- EDUCACIÓN --------------------
   
