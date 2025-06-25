@@ -608,6 +608,12 @@ function agregarTarjetaProyecto(imagen = "", titulo = "", fecha = "", servicio =
     const container = document.getElementById('container-tarjetas-proyectos');
     const tarjetaId = id || generarIdUnico(); // Usa la misma función de ID único
 
+    console.log('Cargando proyectos...'); // Debug
+
+    const proyectos = JSON.parse(localStorage.getItem('proyectos')) || [];
+    console.log('Proyectos cargados:', proyectos); // Debug
+
+
     const tarjetaDiv = document.createElement('div');
     tarjetaDiv.className = 'tarjeta-proyecto';
     tarjetaDiv.dataset.id = tarjetaId;
@@ -678,7 +684,18 @@ function agregarTarjetaProyecto(imagen = "", titulo = "", fecha = "", servicio =
     });
 }
 // ============ GUARDAR PROYECTO ============
-f    // Validar campos
+function guardarProyecto(tarjetaId) {
+    const tarjeta = document.querySelector(`.tarjeta-proyecto[data-id="${tarjetaId}"]`);
+
+    const imagenInput = tarjeta.querySelector('.input-imagen');
+    const preview = tarjeta.querySelector('.preview-imagen');
+    const titulo = tarjeta.querySelector('.input-titulo').value.trim();
+    const fecha = tarjeta.querySelector('.input-fecha').value.trim();
+    const servicio = tarjeta.querySelector('.input-servicio').value.trim();
+    const descripcion = tarjeta.querySelector('.input-descripcion').value.trim();
+    const tecnologias = tarjeta.querySelector('.input-tecnologias').value;
+    const link = tarjeta.querySelector('.input-link').value.trim();
+// Validar campos
 if (!titulo || !fecha || !servicio || !descripcion || !tecnologias) {
     alert("Completa los campos obligatorios (*).");
     return;
@@ -716,51 +733,96 @@ function guardarEnLocalStorage(proyecto, tarjetaId) {
     alert("Proyecto guardado.");
 }
 
-// Función auxiliar para guardar en localStorage
-function guardarEnLocalStorage(proyecto, tarjetaId) {
-    let proyectos = JSON.parse(localStorage.getItem('proyectos')) || [];
-    const existe = proyectos.findIndex(p => p.id === tarjetaId);
-
-    proyecto.id = tarjetaId;
-
-    if (existe !== -1) {
-        proyectos[existe] = proyecto; // Actualizar
-    } else {
-        proyectos.push(proyecto); // Agregar nuevo
-    }
-
-    localStorage.setItem('proyectos', JSON.stringify(proyectos));
-    alert("Proyecto guardado.");
-}
-
 // ============ ELIMINAR PROYECTO ============
-function eliminarProyecto(tarjetaId) {
-    let proyectos = JSON.parse(localStorage.getItem('proyectos')) || [];
-    proyectos = proyectos.filter(p => p.id !== tarjetaId);
-    localStorage.setItem('proyectos', JSON.stringify(proyectos));
 
-    document.querySelector(`.tarjeta-proyecto[data-id="${tarjetaId}"]`).remove();
-    alert("Proyecto eliminado.");
-}
 // ============ CARGAR PROYECTOS AL INICIAR ============
-function cargarProyectos() {
-    const proyectos = JSON.parse(localStorage.getItem('proyectos')) || [];
-    const container = document.getElementById('container-tarjetas-proyectos');
-    if (container) container.innerHTML = ''; // Limpiar
+// Función para cargar proyectos desde localStorage
+function cargarProyectos(containerId = 'container-tarjetas-proyectos', modo = 'edicion') {
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-    proyectos.forEach(proyecto => {
-        agregarTarjetaProyecto(
-            proyecto.imagen,
-            proyecto.titulo,
-            proyecto.fecha,
-            proyecto.servicio,
-            proyecto.descripcion,
-            proyecto.tecnologias,
-            proyecto.link,
-            proyecto.id
-        );
+    const proyectos = JSON.parse(localStorage.getItem('proyectos')) || [];
+    container.innerHTML = '';
+
+    proyectos.forEach((proyecto, index) => {
+        const tarjeta = document.createElement('div');
+        tarjeta.className = 'tarjeta-proyecto';
+
+        if (modo === 'edicion') {
+            // Vista para editor.html
+            tarjeta.innerHTML = crearVistaEdicion(proyecto, index);
+        } else {
+            // Vista para proyectos.html
+            tarjeta.innerHTML = crearVistaPublica(proyecto);
+        }
+
+        container.appendChild(tarjeta);
     });
 }
+
+function eliminarProyecto(index) {
+    let proyectos = JSON.parse(localStorage.getItem('proyectos')) || [];
+    proyectos.splice(index, 1); // Elimina el proyecto del array
+    localStorage.setItem('proyectos', JSON.stringify(proyectos));
+    cargarProyectos(); // Recarga la vista
+    alert('Proyecto eliminado');
+
+
+
+}
+function crearVistaEdicion(proyecto, index) {
+    return `
+        <div class="proyecto-editor">
+            <img src="${proyecto.imagen || ''}" alt="${proyecto.titulo}" class="preview-imagen" />
+            <div class="form-group">
+                <label>Imagen: <input type="file" class="input-imagen" accept="image/*"></label>
+            </div>
+            <div class="form-group">
+                <label>Título: <input type="text" class="input-titulo" value="${proyecto.titulo}" required></label>
+            </div>
+            <div class="form-group">
+                <label>Fecha: <input type="text" class="input-fecha" value="${proyecto.fecha}" required></label>
+            </div>
+            <div class="form-group">
+                <label>Servicio: <input type="text" class="input-servicio" value="${proyecto.servicio}" required></label>
+            </div>
+            <div class="form-group">
+                <label>Descripción: <textarea class="input-descripcion" required>${proyecto.descripcion}</textarea></label>
+            </div>
+            <div class="form-group">
+                <label>Tecnologías: <input type="text" class="input-tecnologias" value="${proyecto.tecnologias}" required></label>
+            </div>
+            <div class="form-group">
+                <label>Enlace: <input type="url" class="input-link" value="${proyecto.link}"></label>
+            </div>
+            <div class="botones-proyecto">
+                <button class="btn-guardar" data-index="${index}">Guardar</button>
+                <button class="btn-eliminar" data-index="${index}">Eliminar</button>
+            </div>
+        </div>
+    `;
+}
+
+function crearVistaPublica(proyecto) {
+    return `
+        <div class="proyecto-card">
+            <div class="proyecto-imagen">
+                <img src="${proyecto.imagen || 'ruta/imagen-default.jpg'}" alt="${proyecto.titulo}">
+            </div>
+            <div class="proyecto-info">
+                <h3>${proyecto.titulo}</h3>
+                <p class="fecha">${proyecto.fecha}</p>
+                <p class="servicio">${proyecto.servicio}</p>
+                <p class="descripcion">${proyecto.descripcion}</p>
+                <div class="tecnologias">
+                    <strong>Tecnologías:</strong> ${proyecto.tecnologias}
+                </div>
+                ${proyecto.link ? `<a href="${proyecto.link}" class="proyecto-link" target="_blank">Ver proyecto</a>` : ''}
+            </div>
+        </div>
+    `;
+}
+
 
 // ============ EVENTOS ============
 document.addEventListener('DOMContentLoaded', cargarProyectos);
