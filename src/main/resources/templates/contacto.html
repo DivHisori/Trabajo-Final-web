@@ -61,7 +61,7 @@
             <div class="container-formulario">
               <div class="fondo-formulario">
                 <h3 class="texto-ascendente-sobremi">Enviame un <span>correo</span></h3>
-                <form method="post" id="form" th:action="@{/registrar}" th:object="${usuarioMongo}">
+                  <form method="post" id="form" th:action="@{/registrar}" th:object="${usuarioMongo}" onsubmit="limpiarFormulario(event)">
                   <div class="input-grupo">
                     <div class="input-caja">
                       <input type="text" placeholder="Nombre Completo" class="texto-ascendente-sobremi" th:field="*{nombre}" required="required">
@@ -82,7 +82,34 @@
               </div>
             </div>
         </section>
-        
+        <script>
+            function limpiarFormulario(event) {
+                event.preventDefault(); // Prevenir el envío normal del formulario
+
+                const form = event.target;
+
+                // Enviar los datos usando fetch
+                fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form)
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            // Limpiar todos los campos
+                            form.reset();
+                            // Opcional: Mostrar mensaje de éxito
+                            alert('Mensaje enviado correctamente');
+                        } else {
+                            alert('Error al enviar el mensaje');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error al enviar el mensaje');
+                    });
+            }
+        </script>
+
     </main>
     <footer>
         <div class="container-footer">

@@ -1,6 +1,8 @@
 package proyecto.web.trabajofinal.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +24,7 @@ public class UsuarioMongoController {
 
     @PostMapping("/registrar")
     public String guardarContacto(@ModelAttribute UsuarioMongo usuarioMongo) {
-        usuarioMongo.setFechaRegistro(LocalDate.now());
+        usuarioMongo.setFechaRegistro(LocalDateTime.now());
         usuarioRepository.save(usuarioMongo);
         UsuarioMongo savedUser = usuarioRepository.save(usuarioMongo);
         System.out.println("Usuario guardado con ID: " + savedUser.getId());

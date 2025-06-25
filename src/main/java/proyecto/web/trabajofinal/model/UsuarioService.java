@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import proyecto.web.trabajofinal.repository.UsuarioRepositoryMongo;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ public class UsuarioService {
     // Método para guardar un nuevo usuario
     public UsuarioMongo guardarUsuario(UsuarioMongo usuario) {
         if (usuario.getFechaRegistro() == null) {
-            usuario.setFechaRegistro(LocalDate.now()); // Establece la fecha de registro si no está definida
+            usuario.setFechaRegistro(LocalDateTime.now()); // Establece la fecha de registro si no está definida
         }
         return usuarioRepository.save(usuario); // ¡Esto guarda el usuario en MongoDB!
     }

@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document; // Anotación par
 import org.springframework.data.mongodb.core.mapping.Field; // Para mapear el nombre del campo si es diferente
 
 import java.time.LocalDate; // Ojo: MongoDB guarda fechas como Date, no LocalDate directamente sin conversión
+import java.time.LocalDateTime;
 
 @Document(collection = "Usuarios") // <-- ¡Cambio aquí! Esto mapea la clase a la colección 'usuarios' en MongoDB
 public class UsuarioMongo {
@@ -28,7 +29,7 @@ public class UsuarioMongo {
     private String mensaje;
 
     @Field("fecha_registro") // <-- Opcional: Mapea 'fechaRegistro' a 'fecha_registro' en MongoDB
-    private LocalDate fechaRegistro; // MongoDB guarda Date, así que Spring Data hará la conversión
+    private LocalDateTime fechaRegistro; // MongoDB guarda Date, así que Spring Data hará la conversión
 
     // Constructor vacío (necesario para Spring Data)
     public UsuarioMongo() {
@@ -84,11 +85,11 @@ public class UsuarioMongo {
         return this;
     }
 
-    public LocalDate getFechaRegistro() {
+    public LocalDateTime getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(LocalDate fechaRegistro) {
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 }
