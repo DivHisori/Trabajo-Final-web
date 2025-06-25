@@ -604,7 +604,7 @@ function generarIdUnico() {
 //
 //
 // ============ FUNCIÓN PARA AGREGAR TARJETA PROYECTO ============
-function agregarTarjetaProyecto(imagen = "", titulo = "", fecha = "", servicio = "", descripcion = "", tecnologias = "", link = "", id = null) {
+function agregarTarjetaProyecto(imagen = "", titulo = "", fecha = "", servicio = "", categoriaFiltro="", descripcion = "", tecnologias = "", link = "", id = null) {
     const container = document.getElementById('container-tarjetas-proyectos');
     const tarjetaId = id || generarIdUnico(); // Usa la misma función de ID único
 
@@ -640,13 +640,24 @@ function agregarTarjetaProyecto(imagen = "", titulo = "", fecha = "", servicio =
       <label for="descripcion-${tarjetaId}">Descripción:</label>
       <textarea id="descripcion-${tarjetaId}" class="input-descripcion" required>${descripcion}</textarea>
     </div>
-    <div class="form-group">
+    <div class="form-group" data-categoria="${categoriaFiltro}">
       <label for="tecnologiasc-${tarjetaId}">Tecnologías:</label>
       <select id="tecnologias-${tarjetaId}" class="input-tecnologias">
         <option value="">Selecciona una tecnología</option>
         <option value="Chow">chow</option>
         <!-- Opciones se cargarán desde localStorage (implementar luego) -->
-        aasd
+        
+      </select>
+    </div>
+    <div class="form-group" ">
+      <label for="CatFiltro-${tarjetaId}">Categoria-Filtro:</label>
+      <select id="CatFiltro-${tarjetaId}" class="input-catFiltro">
+        <option value="">Selecciona una tecnología</option>
+        <option value="web">web</option>
+        <option value="movile">movile</option>
+        <option value="desktop">desktop</option>
+        <!-- Opciones se cargarán desde localStorage (implementar luego) -->
+        
       </select>
     </div>
     <div class="form-group">
@@ -694,14 +705,15 @@ function guardarProyecto(tarjetaId) {
     const servicio = tarjeta.querySelector('.input-servicio').value.trim();
     const descripcion = tarjeta.querySelector('.input-descripcion').value.trim();
     const tecnologias = tarjeta.querySelector('.input-tecnologias').value;
+    const catFiltro = tarjeta.querySelector('.input-catFiltro').value;
     const link = tarjeta.querySelector('.input-link').value.trim();
 // Validar campos
-if (!titulo || !fecha || !servicio || !descripcion || !tecnologias) {
+if (!titulo || !fecha || !servicio || !descripcion || !tecnologias||!catFiltro) {
     alert("Completa los campos obligatorios (*).");
     return;
 }
 // Crear objeto proyecto
-const proyecto = { titulo, fecha, servicio, descripcion, tecnologias, link };
+const proyecto = { titulo, fecha, servicio, descripcion, tecnologias, catFiltro, link };
 // Guardar imagen si se subió una nueva
 if (imagenInput.files.length > 0) {
     const reader = new FileReader();
@@ -736,6 +748,49 @@ function guardarEnLocalStorage(proyecto, tarjetaId) {
 // ============ ELIMINAR PROYECTO ============
 
 // ============ CARGAR PROYECTOS AL INICIAR ============
+function filtrarProyectos() {
+    const botonesFiltro = document.querySelectorAll('#filtros button');
+
+    botonesFiltro.forEach(boton => {
+        boton.addEventListener('click', () => {
+            // Remover clase active de todos los botones
+            botonesFiltro.forEach(b => b.classList.remove('active'));
+            // Agregar clase active al botón clickeado
+            boton.classList.add('active');
+
+            const filtro = boton.getAttribute('data-filtro');
+            const tarjetas = document.querySelectorAll('.proyectos-targeta');
+
+            tarjetas.forEach(tarjeta => {
+                if (filtro === 'todos') {
+                    tarjeta.style.display = 'flex';
+                    // Animación de aparición
+                    setTimeout(() => {
+                        tarjeta.style.opacity = '1';
+                        tarjeta.style.transform = 'translateY(0)';
+                    }, 100);
+                } else {
+                    const categoria = tarjeta.getAttribute('data-categoria');
+                    if (categoria === filtro) {
+                        tarjeta.style.display = 'flex';
+                        // Animación de aparición
+                        setTimeout(() => {
+                            tarjeta.style.opacity = '1';
+                            tarjeta.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        tarjeta.style.opacity = '0';
+                        tarjeta.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            tarjeta.style.display = 'none';
+                        }, 300);
+                    }
+                }
+            });
+        });
+    });
+}
+
 // Función para cargar proyectos desde localStorage
 function cargarProyectos(containerId = 'container-tarjetas-proyectos', modo = 'edicion') {
     const container = document.getElementById(containerId);
@@ -746,19 +801,25 @@ function cargarProyectos(containerId = 'container-tarjetas-proyectos', modo = 'e
 
     proyectos.forEach((proyecto, index) => {
         const tarjeta = document.createElement('div');
-        tarjeta.className = 'tarjeta-proyecto';
+        tarjeta.className = 'proyectos-targeta';
+        // Asegurarse de que la categoría esté en minúsculas y sea válida
+        const categoria = proyecto.catFiltro ? proyecto.catFiltro.toLowerCase() : 'web';
+        tarjeta.setAttribute('data-categoria', categoria);
 
         if (modo === 'edicion') {
-            // Vista para editor.html
             tarjeta.innerHTML = crearVistaEdicion(proyecto, index);
         } else {
-            // Vista para proyectos.html
             tarjeta.innerHTML = crearVistaPublica(proyecto);
         }
 
         container.appendChild(tarjeta);
     });
+
+    // Inicializar el filtrado después de cargar los proyectos
+    filtrarProyectos();
 }
+
+
 
 function eliminarProyecto(index) {
     let proyectos = JSON.parse(localStorage.getItem('proyectos')) || [];
@@ -809,7 +870,7 @@ function crearVistaPublica(proyecto) {
             <div class="proyecto-imagen">
                 <img src="${proyecto.imagen || 'ruta/imagen-default.jpg'}" alt="${proyecto.titulo}">
             </div>
-            <div class="proyecto-info" data-categoria="web">
+            <div class="proyecto-info" data-categoria="${proyecto.catFiltro}">
                 <h3>${proyecto.titulo}</h3>
                 <p class="fecha">${proyecto.fecha}</p>
                 <p class="servicio">${proyecto.servicio}</p>
@@ -841,4 +902,13 @@ document.addEventListener('click', (e) => {
             eliminarProyecto(e.target.dataset.id);
         }
     }
+
+
+
+// Inicializar el filtrado cuando el DOM esté cargado
+    document.addEventListener('DOMContentLoaded', () => {
+        cargarProyectos('proyectos-container', 'publico');
+
+    });
+
 });

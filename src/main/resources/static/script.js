@@ -515,6 +515,7 @@ function initMap() {
 
 
 /*----------------filtro-targetas-proyecto-------------------------*/
+
 const botonesFiltro = document.querySelectorAll('#filtros button');
 const proyectos = document.querySelectorAll('.proyectos-targeta');
 
