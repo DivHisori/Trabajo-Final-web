@@ -15,12 +15,14 @@ public class LoginController {
     public String showLogin(@RequestParam(value = "error", required = false) String error,
                             @RequestParam(value = "logout", required = false) String logout,
                             Model model) {
+
         if (error != null) {
             model.addAttribute("error", "Usuario o contraseña incorrectos");
         }
         if (logout != null) {
             model.addAttribute("message", "Has cerrado sesión exitosamente");
         }
+
         return "login";
     }
     @GetMapping("/editor")
