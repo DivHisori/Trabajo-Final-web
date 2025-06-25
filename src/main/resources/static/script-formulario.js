@@ -678,41 +678,42 @@ function agregarTarjetaProyecto(imagen = "", titulo = "", fecha = "", servicio =
     });
 }
 // ============ GUARDAR PROYECTO ============
-function guardarProyecto(tarjetaId) {
-    const tarjeta = document.querySelector(`.tarjeta-proyecto[data-id="${tarjetaId}"]`);
-
-    const imagenInput = tarjeta.querySelector('.input-imagen');
-    const preview = tarjeta.querySelector('.preview-imagen');
-    const titulo = tarjeta.querySelector('.input-titulo').value.trim();
-    const fecha = tarjeta.querySelector('.input-fecha').value.trim();
-    const servicio = tarjeta.querySelector('.input-servicio').value.trim();
-    const descripcion = tarjeta.querySelector('.input-descripcion').value.trim();
-    const tecnologias = tarjeta.querySelector('.input-tecnologias').value;
-    const link = tarjeta.querySelector('.input-link').value.trim();
-
-    // Validar campos
-    if (!titulo || !fecha || !servicio || !descripcion || !tecnologias) {
-        alert("Completa los campos obligatorios (*).");
-        return;
-    }
-
-    // Crear objeto proyecto
-    const proyecto = { titulo, fecha, servicio, descripcion, tecnologias, link };
-
-    // Guardar imagen si se subió una nueva
-    if (imagenInput.files.length > 0) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            proyecto.imagen = e.target.result;
-            guardarEnLocalStorage(proyecto, tarjetaId);
-        };
-        reader.readAsDataURL(imagenInput.files[0]);
-    } else if (preview) {
-        proyecto.imagen = preview.src;
+f    // Validar campos
+if (!titulo || !fecha || !servicio || !descripcion || !tecnologias) {
+    alert("Completa los campos obligatorios (*).");
+    return;
+}
+// Crear objeto proyecto
+const proyecto = { titulo, fecha, servicio, descripcion, tecnologias, link };
+// Guardar imagen si se subió una nueva
+if (imagenInput.files.length > 0) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        proyecto.imagen = e.target.result;
         guardarEnLocalStorage(proyecto, tarjetaId);
+    };
+    reader.readAsDataURL(imagenInput.files[0]);
+} else if (preview) {
+    proyecto.imagen = preview.src;
+    guardarEnLocalStorage(proyecto, tarjetaId);
+} else {
+    guardarEnLocalStorage(proyecto, tarjetaId);
+}
+}
+// Función auxiliar para guardar en localStorage
+function guardarEnLocalStorage(proyecto, tarjetaId) {
+    let proyectos = JSON.parse(localStorage.getItem('proyectos')) || [];
+    const existe = proyectos.findIndex(p => p.id === tarjetaId);
+
+    proyecto.id = tarjetaId;
+
+    if (existe !== -1) {
+        proyectos[existe] = proyecto; // Actualizar
     } else {
-        guardarEnLocalStorage(proyecto, tarjetaId);
+        proyectos.push(proyecto); // Agregar nuevo
     }
+    localStorage.setItem('proyectos', JSON.stringify(proyectos));
+    alert("Proyecto guardado.");
 }
 
 // Función auxiliar para guardar en localStorage
