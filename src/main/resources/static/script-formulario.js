@@ -809,7 +809,7 @@ function crearVistaPublica(proyecto) {
             <div class="proyecto-imagen">
                 <img src="${proyecto.imagen || 'ruta/imagen-default.jpg'}" alt="${proyecto.titulo}">
             </div>
-            <div class="proyecto-info">
+            <div class="proyecto-info" data-categoria="web">
                 <h3>${proyecto.titulo}</h3>
                 <p class="fecha">${proyecto.fecha}</p>
                 <p class="servicio">${proyecto.servicio}</p>
