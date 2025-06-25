@@ -575,28 +575,183 @@ function generarIdUnico() {
       agregarTarjetaExperiencia(fecha, titulo, empresa, descripcion, id);
     });
   }
-  
-  // ------------------ Inicialización ------------------
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    // Botón agregar educación
-    const btnAgregarEducacion = document.getElementById('agregar-tarjeta');
-    if (btnAgregarEducacion) {
-      btnAgregarEducacion.addEventListener('click', e => {
-        e.preventDefault();
-        agregarTarjetaEducacion('', '', '', '');
-      });
-    }
-    cargarTarjetasEducacion();
-  
-    // Botón agregar experiencia
-    const btnAgregarExperiencia = document.getElementById('agregar-tarjeta-experiencia');
-    if (btnAgregarExperiencia) {
-      btnAgregarExperiencia.addEventListener('click', e => {
-        e.preventDefault();
-        agregarTarjetaExperiencia('', '', '', '');
-      });
-    }
-    cargarTarjetasExperiencia();
+ // -------------------- SERVICIOS --------------------
+function agregarTarjetaServicio(nombre, tecnologias, descripcion, id = null) {
+  const container = document.getElementById('container-tarjetas-servicios');
+  if (!container) return;
+
+  const tarjetaDiv = document.createElement('div');
+  tarjetaDiv.className = 'timeline-item';
+  tarjetaDiv.dataset.id = id || generarIdUnico();
+
+  tarjetaDiv.innerHTML = `
+    <label>Nombre del Servicio:
+      <input type="text" class="input-nombre" value="${nombre}" placeholder="Servicio" required>
+    </label>
+    <label>Tecnologías Usadas:
+      <input type="text" class="input-tecnologias" value="${tecnologias}" placeholder="Tecnologías" required>
+    </label>
+    <label>Descripción:
+      <textarea class="input-descripcion" placeholder="Descripción" required>${descripcion}</textarea>
+    </label>
+    <button class="btn-guardar" type="button">Guardar</button>
+    <button class="btn-eliminar" type="button">Eliminar</button>
+  `;
+
+  tarjetaDiv.querySelector('.btn-guardar').addEventListener('click', () => {
+    guardarTarjetaServicio(tarjetaDiv);
   });
-  
+
+  tarjetaDiv.querySelector('.btn-eliminar').addEventListener('click', () => {
+    eliminarTarjetaServicio(tarjetaDiv);
+  });
+
+  container.appendChild(tarjetaDiv);
+}
+
+function guardarTarjetaServicio(tarjetaDiv) {
+  const id = tarjetaDiv.dataset.id;
+  const nombre = tarjetaDiv.querySelector('.input-nombre').value.trim();
+  const tecnologias = tarjetaDiv.querySelector('.input-tecnologias').value.trim();
+  const descripcion = tarjetaDiv.querySelector('.input-descripcion').value.trim();
+
+  if (!nombre || !tecnologias || !descripcion) {
+    alert('Completa todos los campos de servicios.');
+    return;
+  }
+
+  let tarjetas = JSON.parse(localStorage.getItem('servicios')) || [];
+  const index = tarjetas.findIndex(t => t.id === id);
+
+  const tarjetaDatos = { id, nombre, tecnologias, descripcion };
+
+  if (index !== -1) tarjetas[index] = tarjetaDatos;
+  else tarjetas.push(tarjetaDatos);
+
+  localStorage.setItem('servicios', JSON.stringify(tarjetas));
+  alert('Servicio guardado.');
+}
+
+function eliminarTarjetaServicio(tarjetaDiv) {
+  const id = tarjetaDiv.dataset.id;
+  let tarjetas = JSON.parse(localStorage.getItem('servicios')) || [];
+  tarjetas = tarjetas.filter(t => t.id !== id);
+  localStorage.setItem('servicios', JSON.stringify(tarjetas));
+  tarjetaDiv.remove();
+  alert('Servicio eliminado.');
+}
+
+function cargarTarjetasServicios() {
+  const tarjetas = JSON.parse(localStorage.getItem('servicios')) || [];
+  const container = document.getElementById('container-tarjetas-servicios');
+  if (container) container.innerHTML = '';
+  tarjetas.forEach(({ nombre, tecnologias, descripcion, id }) => {
+    agregarTarjetaServicio(nombre, tecnologias, descripcion, id);
+  });
+}
+
+// -------------------- PROYECTOS --------------------
+function agregarTarjetaProyecto(nombre, tecnologias, descripcion, id = null) {
+  const container = document.getElementById('container-tarjetas-proyectos');
+  if (!container) return;
+
+  const tarjetaDiv = document.createElement('div');
+  tarjetaDiv.className = 'timeline-item';
+  tarjetaDiv.dataset.id = id || generarIdUnico();
+
+  tarjetaDiv.innerHTML = `
+    <label>Nombre del Proyecto:
+      <input type="text" class="input-nombre" value="${nombre}" placeholder="Proyecto" required>
+    </label>
+    <label>Tecnologías Usadas:
+      <input type="text" class="input-tecnologias" value="${tecnologias}" placeholder="Tecnologías" required>
+    </label>
+    <label>Descripción:
+      <textarea class="input-descripcion" placeholder="Descripción" required>${descripcion}</textarea>
+    </label>
+    <button class="btn-guardar" type="button">Guardar</button>
+    <button class="btn-eliminar" type="button">Eliminar</button>
+  `;
+
+  tarjetaDiv.querySelector('.btn-guardar').addEventListener('click', () => {
+    guardarTarjetaProyecto(tarjetaDiv);
+  });
+
+  tarjetaDiv.querySelector('.btn-eliminar').addEventListener('click', () => {
+    eliminarTarjetaProyecto(tarjetaDiv);
+  });
+
+  container.appendChild(tarjetaDiv);
+}
+
+function guardarTarjetaProyecto(tarjetaDiv) {
+  const id = tarjetaDiv.dataset.id;
+  const nombre = tarjetaDiv.querySelector('.input-nombre').value.trim();
+  const tecnologias = tarjetaDiv.querySelector('.input-tecnologias').value.trim();
+  const descripcion = tarjetaDiv.querySelector('.input-descripcion').value.trim();
+
+  if (!nombre || !tecnologias || !descripcion) {
+    alert('Completa todos los campos del proyecto.');
+    return;
+  }
+
+  let tarjetas = JSON.parse(localStorage.getItem('proyectos')) || [];
+  const index = tarjetas.findIndex(t => t.id === id);
+
+  const tarjetaDatos = { id, nombre, tecnologias, descripcion };
+
+  if (index !== -1) tarjetas[index] = tarjetaDatos;
+  else tarjetas.push(tarjetaDatos);
+
+  localStorage.setItem('proyectos', JSON.stringify(tarjetas));
+  alert('Proyecto guardado.');
+}
+
+function eliminarTarjetaProyecto(tarjetaDiv) {
+  const id = tarjetaDiv.dataset.id;
+  let tarjetas = JSON.parse(localStorage.getItem('proyectos')) || [];
+  tarjetas = tarjetas.filter(t => t.id !== id);
+  localStorage.setItem('proyectos', JSON.stringify(tarjetas));
+  tarjetaDiv.remove();
+  alert('Proyecto eliminado.');
+}
+
+function cargarTarjetasProyectos() {
+  const tarjetas = JSON.parse(localStorage.getItem('proyectos')) || [];
+  const container = document.getElementById('container-tarjetas-proyectos');
+  if (container) container.innerHTML = '';
+  tarjetas.forEach(({ nombre, tecnologias, descripcion, id }) => {
+    agregarTarjetaProyecto(nombre, tecnologias, descripcion, id);
+  });
+}
+
+// -------------------- INICIALIZACIÓN --------------------
+document.addEventListener('DOMContentLoaded', () => {
+  // Educación
+  document.getElementById('agregar-tarjeta')?.addEventListener('click', e => {
+    e.preventDefault();
+    agregarTarjetaEducacion('', '', '', '');
+  });
+  cargarTarjetasEducacion();
+
+  // Experiencia
+  document.getElementById('agregar-tarjeta-experiencia')?.addEventListener('click', e => {
+    e.preventDefault();
+    agregarTarjetaExperiencia('', '', '', '');
+  });
+  cargarTarjetasExperiencia();
+
+  // Servicios
+  document.getElementById('agregar-tarjeta-servicio')?.addEventListener('click', e => {
+    e.preventDefault();
+    agregarTarjetaServicio('', '', '');
+  });
+  cargarTarjetasServicios();
+
+  // Proyectos
+  document.getElementById('agregar-tarjeta-proyecto')?.addEventListener('click', e => {
+    e.preventDefault();
+    agregarTarjetaProyecto('', '', '');
+  });
+  cargarTarjetasProyectos();
+});
