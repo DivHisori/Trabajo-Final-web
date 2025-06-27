@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style-contacto.css">
+    <link rel="stylesheet" href="/css/style-contacto.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,25 +26,7 @@
         <i id="icon-sun" class="fa-solid fa-sun" style="display: inline-block;"></i>
         <i id="icon-moon" class="fa-solid fa-moon" style="display: none;"></i>
     </button>
-    <header>
-        <!--
-        Contiene el logo con enlace a la página principal, un botón para abrir el menú en dispositivos móviles
-        y una barra de navegación con enlaces a las secciones principales del portafolio: Inicio, Sobre mí, Proyectos y Contacto.
-        -->
-        <div class="container-header">
-            <a href="/index" class="logo"><h3 class="nombre-display">Andres</h3><span class="apellido-display">Garza</span> </a>
-            
-            <button class="btn-menu" aria-label="Abrir menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-            <nav class="navbar">
-                <ul>
-                    <li><a href="/index">Inicio</a></li>
-                    <li><a href="/sobremi">Sobre mí</a></li>
-                    <li><a href="/proyectos">Proyectos</a></li>
-                    <li><a href="/contacto">Contacto</a></li>
-                </ul>   
-            </nav>
-        </div>        
-    </header>
+    <div th:replace="/fragments/usos :: cabeza"></div>
     <main>
         <section class="contacto" id="contacto">
             <div class="container-informacion">
@@ -111,57 +93,10 @@
         </script>
 
     </main>
-    <footer>
-        <div class="container-footer">
-                <div class="footer-superior">
-                    <div class="container-mapa">
-                        <h3>Mi <span>ubicación</span></h3>
-                        <div id="map"></div>
-                    </div>
-                <div class="texto-footer">
-                    <div class="footer-menu">
-                        <h4>Menu</h4>
-                        <ul class="lista">
-                            <li>
-                                <a href="/index">Inicio</a>
-                            </li>
-                            <li>
-                                <a href="/sobremi">Sobre mi</a>
-                            </li>
-                            <li>
-                                <a href="/Proyectos">Proyectos</a>
-                            </li>
-                            <li>
-                                <a href="/contacto"> contacto</a>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-contacto">
-                        <h4>Contacto</h4>
-                            
-                            <div class="styleFooter-contacto otra-lista"></div>
-
-                       
-                    </div>
-                    <div class="redes redes-footer">
-                        <h4>redes</h4>
-                        <div class="social-container style2"></div>
-                    </div>
-
-                    
-                </div>
-            </div>
-            <div class="footer-inferior">
-                <p class="copyright">
-                © Andres Garza | Todos los derechos reservados.
-                </p>
-            </div>
-        </div>
-    </footer>
+    <div th:replace="/fragments/usos :: foot"></div>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">emailjs.init('N-Qj4Yxgsu8nK4poX')</script>
-    <script src="/script.js"></script>
+    <script src="/js/script.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDpLiSpzD3YXJeZf7flL7cQnBCKyygQSI&callback=initMap"></script>
 </body>
 </html>

@@ -29,9 +29,5 @@ public class LoginController {
     public String editor() {
         return "editor";
     }
-    @GetMapping("/acceso-denegado")
-    public String accesoDenegado(){
-        return "acceso-denegado";
-    }
 
 }

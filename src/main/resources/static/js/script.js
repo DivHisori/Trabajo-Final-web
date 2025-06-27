@@ -75,6 +75,32 @@ if (savedApellido) {
 } else {
     console.log('No se encontró el apellido guardado.');
 }
+//apellido mas nombre
+function nCompleto(){
+    return savedNombre + ' ' + savedApellido;
+}
+const path = window.location.pathname;
+const page = path.split("/").pop();
+
+let tituloBase = "";
+
+if (page === "index" || page === "") {
+    tituloBase = "Portafolio - ";
+} else if (page === "proyectos") {
+    tituloBase = "Proyectos - ";
+} else if(page === "sobremi"){
+    tituloBase = "Sobre mí - ";
+} else if(page === "contacto"){
+    tituloBase = "Contacto - ";
+} else {
+    tituloBase = "Sitio Web - ";
+}
+
+
+// Cambiar el título cuando se cargue la página
+document.addEventListener("DOMContentLoaded", function () {
+    document.title = tituloBase + nCompleto();
+});
 //------------Recuperar la descripción guardada--------------
 const savedDescripcion = localStorage.getItem('descripcion');
 if (savedDescripcion) {
