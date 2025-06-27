@@ -8,7 +8,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 @SpringBootApplication
 //todo parte de contacto, limpiar los correo
 //todo agregar a que hora se logueo CHOW usuarioPostgreSQL
-//todo NO necesario cambiar el texto cambiante
+//todo NO necesario cambiar el texto cambiante del index
+//todo mejorar el css del editor, que todo no sea de corrido
 public class main {
     public static void main(String[] args) {
         SpringApplication.run(main.class, args);
