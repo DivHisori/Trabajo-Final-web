@@ -101,6 +101,14 @@ if (page === "index" || page === "") {
 document.addEventListener("DOMContentLoaded", function () {
     document.title = tituloBase + nCompleto();
 });
+
+// Insertar el nombre en el footer
+document.addEventListener("DOMContentLoaded", function () {
+    const nombreElemento = document.getElementById("nombre-completo");
+    if (nombreElemento) {
+        nombreElemento.textContent ="   " + nCompleto() + "   ";
+    }
+});
 //------------Recuperar la descripción guardada--------------
 const savedDescripcion = localStorage.getItem('descripcion');
 if (savedDescripcion) {
