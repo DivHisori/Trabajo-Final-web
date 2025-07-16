@@ -35,7 +35,7 @@ btnSave.addEventListener('click', function() {
 //=================Guarda-nombre=========================== 
 //==========================================================     
 function guardarNombre() {
-    const nombreInput = document.getElementById('nombre');
+    const nombreInput = document.querySelector('input[id="nombre"] + input');
     const nombreValue = nombreInput.value.trim(); // Eliminar espacios en blanco
     if (nombreValue === '') {
         alert('No hay datos para almacenar en el nombre.');
@@ -49,7 +49,7 @@ function guardarNombre() {
 //=================Guarda-apellido=========================== 
 //========================================================== 
 function guardarApellido() {
-    const apellidoInput = document.getElementById('apellido');
+    const apellidoInput = document.querySelector('input[id="apellido"] + input');
     const apellidoValue = apellidoInput.value.trim(); // Eliminar espacios en blanco
     if (apellidoValue === '') {
         alert('No hay datos para almacenar en el apellido.');

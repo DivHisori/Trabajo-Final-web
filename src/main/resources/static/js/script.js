@@ -187,6 +187,7 @@ const rootStyle = getComputedStyle(document.documentElement);
 const originalBackground = rootStyle.getPropertyValue('--background-color').trim();
 const originalText = rootStyle.getPropertyValue('--text-color').trim();
 const backgroundSecundario = rootStyle.getPropertyValue('--secondary-bg').trim();
+const bgSecundario = rootStyle.getPropertyValue('--secundary-background-color').trim();
 const colorFondoTarjeta = rootStyle.getPropertyValue('--color-fondo-boton').trim();
 
 const invertedBackground = originalText;
@@ -205,6 +206,7 @@ function applyMode(mode) {
         document.documentElement.style.setProperty('--background-color', invertedBackground);
         document.documentElement.style.setProperty('--text-color', invertedText);
         document.documentElement.style.setProperty('--secondary-bg', colorFondoTarjeta);
+        document.documentElement.style.setProperty('--secundary-background-color', colorFondoTarjeta);
         iconSun.style.display = 'none';
         iconMoon.style.display = 'inline-block';
         btnLuzLuna.setAttribute('aria-pressed', 'true');
@@ -212,6 +214,7 @@ function applyMode(mode) {
         document.documentElement.style.setProperty('--background-color', originalBackground);
         document.documentElement.style.setProperty('--text-color', originalText);
         document.documentElement.style.setProperty('--secondary-bg', backgroundSecundario);
+        document.documentElement.style.setProperty('--secundary-background-color', backgroundSecundario);
         iconSun.style.display = 'inline-block';
         iconMoon.style.display = 'none';
         btnLuzLuna.setAttribute('aria-pressed', 'false');
