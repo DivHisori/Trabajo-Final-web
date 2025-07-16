@@ -140,12 +140,37 @@ function renderSocialList() {
     socialList.innerHTML = ''; // Limpiar la lista antes de renderizar
     socialListData.forEach(item => {
         const socialItem = document.createElement('div');
+        // socialItem.classList.add('form-row');
         socialItem.classList.add('social-item');
         socialItem.dataset.social = item.social; // Guardar el nombre de la red social
         socialItem.innerHTML = `
-            <span>${item.social}: ${item.link}</span>
-            <button class="btn-edit" data-social="${item.social}">Editar</button>
-            <button class="btn-remove" data-social="${item.social}">Eliminar</button>
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                height="30px" width="30px"
+                x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512; margin-top: 10px;" xml:space="preserve">
+                <g>
+                    <g>
+                        <path d="M256,0c-62.737,0-113.778,54.223-113.778,120.872S193.263,241.744,256,241.744s113.778-54.223,113.778-120.872 S318.737,0,256,0z M256,211.838c-46.247,0-83.871-40.807-83.871-90.965S209.753,29.907,256,29.907 c46.246,0,83.871,40.807,83.871,90.965C339.871,171.03,302.246,211.838,256,211.838z" style="fill: var(--text-color);"/></g>
+                    </g>
+                    <g>
+                        <g>
+                            <path d="M256,269.786c-116.131,0-210.61,94.479-210.61,210.61V512h421.22v-31.603C466.61,364.266,372.131,269.786,256,269.786z M436.703,482.093H75.297v-1.697c0-99.64,81.063-180.703,180.703-180.703s180.703,81.063,180.703,180.703V482.093z" style="fill: var(--text-color);"/>
+                        </g>
+                    </g>
+            </svg>
+            <div class="social-link">
+            <input type="" id="inputSocial-link" value="${item.link}">
+<!--            <span>${item.link}</span>-->
+            </div>
+
+            <button class="btn-remove" id="btnEliminar" >
+                <svg height="30px" width="30px" viewBox="-85 -19 617 617.33331" xmlns="http://www.w3.org/2000/svg">
+                <path d="m219.121094 319.375c-6.894532.019531-12.480469 5.605469-12.5 12.5v152.5c0 6.90625 5.601562 12.5 12.5 12.5 6.902344 0 12.5-5.59375 12.5-12.5v-152.5c-.019532-6.894531-5.601563-12.480469-12.5-12.5zm0 0" fill="#000000" style="fill: var(--text-color);"></path>
+                <path d="m299.121094 319.375c-6.894532.019531-12.480469 5.605469-12.5 12.5v152.5c0 6.90625 5.601562 12.5 12.5 12.5 6.902344 0 12.5-5.59375 12.5-12.5v-152.5c-.019532-6.894531-5.601563-12.480469-12.5-12.5zm0 0" fill="#000000" style="fill: var(--text-color);"></path>
+                <path d="m139.121094 319.375c-6.894532.019531-12.480469 5.605469-12.5 12.5v152.5c0 6.90625 5.601562 12.5 12.5 12.5 6.902344 0 12.5-5.59375 12.5-12.5v-152.5c-.019532-6.894531-5.601563-12.480469-12.5-12.5zm0 0" fill="#000000" style="fill: var(--text-color);"></path>
+                <path d="m386.121094 64h-71.496094v-36.375c-.007812-15.257812-12.375-27.62109375-27.628906-27.625h-135.746094c-15.257812.00390625-27.621094 12.367188-27.628906 27.625v36.5h-71.496094c-27.515625.007812-51.003906 19.863281-55.582031 46.992188-4.582031 27.128906 11.09375 53.601562 37.078125 62.632812-.246094.894531-.371094 1.820312-.375 2.75v339.75c.015625 34.511719 27.988281 62.484375 62.5 62.5h246.875c34.511718-.015625 62.492187-27.988281 62.5-62.5v-339.75c.011718-.929688-.117188-1.855469-.375-2.75 26.019531-9.0625 41.6875-35.585938 37.078125-62.75s-28.152344-47.023438-55.703125-47zm-237.371094-36.375c.003906-1.449219 1.175781-2.617188 2.621094-2.625h135.753906c1.445312.007812 2.617188 1.175781 2.621094 2.625v36.5h-140.996094zm193.75 526.125h-246.753906c-20.683594-.058594-37.4375-16.816406-37.5-37.5v-339.375h321.875v339.375c-.117188 20.707031-16.914063 37.453125-37.621094 37.5zm43.621094-401.875h-333.996094c-17.332031 0-31.378906-14.046875-31.378906-31.375s14.046875-31.375 31.378906-31.375h333.996094c17.332031 0 31.378906 14.046875 31.378906 31.375s-14.046875 31.375-31.378906 31.375zm0 0" fill="#000000" style="fill: var(--text-color);"></path>
+</svg>
+
+            </button>
         `;
         socialList.appendChild(socialItem);
 
@@ -153,13 +178,13 @@ function renderSocialList() {
         const btnEdit = socialItem.querySelector('.btn-edit');
         const btnRemove = socialItem.querySelector('.btn-remove');
 
-        btnEdit.addEventListener('click', function() {
-            socialSelect.value = item.social;
-            socialLink.value = item.link;
-            socialListData = socialListData.filter(i => i.social !== item.social); // Eliminar el elemento para editar
-            localStorage.setItem('socialList', JSON.stringify(socialListData));
-            renderSocialList(); // Renderizar la lista actualizada
-        });
+        // btnEdit.addEventListener('click', function() {
+        //     socialSelect.value = item.social;
+        //     socialLink.value = item.link;
+        //     socialListData = socialListData.filter(i => i.social !== item.social); // Eliminar el elemento para editar
+        //     localStorage.setItem('socialList', JSON.stringify(socialListData));
+        //     renderSocialList(); // Renderizar la lista actualizada
+        // });
 
         btnRemove.addEventListener('click', function() {
             socialListData = socialListData.filter(i => i.social !== item.social); // Eliminar el elemento
@@ -205,110 +230,26 @@ window.onload = function() {
 };
 function guardarContacto() {
     const tipo = document.getElementById('contact-type').value;
-    const dato = document.getElementById('contact-input').value.trim();
+    const dato = document.getElementById('contact-input').value;
+
     if (!tipo || !dato) {
-        alert('Por favor, selecciona un medio y completa el dato.');
+        alert('Por favor, completa todos los campos');
         return;
     }
-    const contactos = JSON.parse(localStorage.getItem('contactos')) || {};
-    // Verificar si ya existe un contacto de este tipo
-    if (contactos[tipo]) {
-        alert(`Ya existe un contacto de tipo ${tipo}.`);
-        return;
-    }
-// Guardar el nuevo contacto
-    contactos[tipo] = dato;
-    localStorage.setItem('contactos', JSON.stringify(contactos));
-    crearContactoElemento(tipo, dato);
-    document.getElementById('contact-input').value = ''; // Limpiar el input
-    document.getElementById('contact-type').value = ''; // Reiniciar el selector
-}
-function crearContactoElemento(tipo, dato) {
+
     const contactosList = document.getElementById('contactos-list');
-    const contactoDiv = document.createElement('div');
-    contactoDiv.className = 'contact-box';
-    contactoDiv.id = tipo;
-    // Asignar un ícono basado en el tipo de contacto
-    let icono;
-    switch (tipo) {
-        case 'telefono':
-            icono = '<i class="fa-solid fa-phone"></i>';
-            break;
-        case 'Ubicacion':
-            icono = '<i class="fa-solid fa-location-dot"></i>';
-            break;
-        case 'correo':
-            icono = '<i class="fa-solid fa-envelope"></i>';
-            break;
-        default:
-            icono = '';
-    }
-    contactoDiv.innerHTML = `
-        ${icono}
-        <div>
-            <strong>${tipo.charAt(0).toUpperCase() + tipo.slice(1)}:</strong> ${dato}
-        </div>
-        <button onclick="editarContacto('${tipo}')">Editar</button>
-        <button onclick="eliminarContacto('${tipo}')">Eliminar</button>
-    `;
-    contactosList.appendChild(contactoDiv);
-}
-function editarContacto(tipo) {
-    const contactos = JSON.parse(localStorage.getItem('contactos'));
-    const nuevoDato = prompt(`Edita el dato para ${tipo.charAt(0).toUpperCase() + tipo.slice(1)}:`, contactos[tipo]);
-    if (nuevoDato !== null && nuevoDato.trim() !== '') {
-        contactos[tipo] = nuevoDato.trim();
-        localStorage.setItem('contactos', JSON.stringify(contactos));
-        document.getElementById(tipo).querySelector('div').innerHTML = `<strong>${tipo.charAt(0).toUpperCase() + tipo.slice(1)}:</strong> ${contactos[tipo]}`;
-    }
-}
-function eliminarContacto(tipo) {
-    const contactos = JSON.parse(localStorage.getItem('contactos'));
-    delete contactos[tipo];
-    localStorage.setItem('contactos', JSON.stringify(contactos));
-    document.getElementById(tipo).remove();
-}
 
-//
-//
-//
-// Cargar contactos y datos de experiencias al cargar la página
-// Cargar contactos y datos de experiencias al cargar la página
-window.onload = function() {
-    cargarContactos(); // Si tienes esta función definida
-    cargarDatos(); // Si tienes esta función definida
-    cargarTarjetasEducacion(); // Cargar tarjetas de educación
-    cargarTarjetasExperiencia(); // Cargar tarjetas de experiencia
-};
-
-
-// Funciones para gestionar contactos
-function cargarContactos() {
-    const contactos = JSON.parse(localStorage.getItem('contactos')) || {};
-    for (const [key, value] of Object.entries(contactos)) {
-        crearContactoElemento(key, value);
-    }
-}
-
-function guardarContacto() {
-    const tipo = document.getElementById('contact-type').value;
-    const dato = document.getElementById('contact-input').value.trim();
-    if (!tipo || !dato) {
-        alert('Por favor, selecciona un medio y completa el dato.');
-        return;
-    }
-    const contactos = JSON.parse(localStorage.getItem('contactos')) || {};
     // Verificar si ya existe un contacto de este tipo
-    if (contactos[tipo]) {
-        alert(`Ya existe un contacto de tipo ${tipo}.`);
-        return;
+    const contactoExistente = document.getElementById(tipo);
+    if (contactoExistente) {
+        contactoExistente.remove();
     }
-    // Guardar el nuevo contacto
-    contactos[tipo] = dato;
-    localStorage.setItem('contactos', JSON.stringify(contactos));
+
     crearContactoElemento(tipo, dato);
-    document.getElementById('contact-input').value = ''; // Limpiar el input
-    document.getElementById('contact-type').value = ''; // Reiniciar el selector
+
+    // Limpiar los campos del formulario
+    document.getElementById('contact-type').value = '';
+    document.getElementById('contact-input').value = '';
 }
 
 function crearContactoElemento(tipo, dato) {
@@ -316,6 +257,14 @@ function crearContactoElemento(tipo, dato) {
     const contactoDiv = document.createElement('div');
     contactoDiv.className = 'contact-box';
     contactoDiv.id = tipo;
+
+    // Definir títulos más descriptivos
+    const titulos = {
+        telefono: 'Teléfono',
+        ubicacion: 'Ubicación',
+        correo: 'Correo Electrónico'
+    };
+
     // Asignar un ícono basado en el tipo de contacto
     let icono;
     switch (tipo) {
@@ -331,73 +280,164 @@ function crearContactoElemento(tipo, dato) {
         default:
             icono = '';
     }
+
     contactoDiv.innerHTML = `
-        ${icono}
-        <div>
-            <strong>${tipo.charAt(0).toUpperCase() + tipo.slice(1)}:</strong> ${dato}
+        <div class="contact-content">
+            ${icono}
+            <div class="contact-info">
+                <strong>${titulos[tipo] || tipo.charAt(0).toUpperCase() + tipo.slice(1)}:</strong>
+                <span>${dato}</span>
+            </div>
+            <div class="contact-actions">
+                <button class="btn-edit" onclick="editarContacto('${tipo}')">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn-delete" onclick="eliminarContacto('${tipo}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
         </div>
-        <button onclick="editarContacto('${tipo}')">Editar</button>
-        <button onclick="eliminarContacto('${tipo}')">Eliminar</button>
     `;
+
     contactosList.appendChild(contactoDiv);
 }
 
 function editarContacto(tipo) {
-    const contactos = JSON.parse(localStorage.getItem('contactos'));
-    const nuevoDato = prompt(`Edita el dato para ${tipo.charAt(0).toUpperCase() + tipo.slice(1)}:`, contactos[tipo]);
-    if (nuevoDato !== null && nuevoDato.trim() !== '') {
-        contactos[tipo] = nuevoDato.trim();
-        localStorage.setItem('contactos', JSON.stringify(contactos));
-        document.getElementById(tipo).querySelector('div').innerHTML = `<strong>${tipo.charAt(0).toUpperCase() + tipo.slice(1)}:</strong> ${contactos[tipo]}`;
-    }
+    const contactoDiv = document.getElementById(tipo);
+    const dato = contactoDiv.querySelector('.contact-info span').textContent;
+
+    // Rellenar el formulario con los datos existentes
+    document.getElementById('contact-type').value = tipo;
+    document.getElementById('contact-input').value = dato;
+
+    // Abrir el modal
+    abrirModal('modalContacto');
+
+    // Eliminar el contacto existente
+    contactoDiv.remove();
 }
 
 function eliminarContacto(tipo) {
-    const contactos = JSON.parse(localStorage.getItem('contactos'));
-    delete contactos[tipo];
-    localStorage.setItem('contactos', JSON.stringify(contactos));
-    document.getElementById(tipo).remove();
+    if (confirm('¿Estás seguro de que deseas eliminar este contacto?')) {
+        const contacto = document.getElementById(tipo);
+        if (contacto) {
+            contacto.remove();
+        }
+    }
 }
+
+
+//
+//
+//
+// Cargar contactos y datos de experiencias al cargar la página
+// Cargar contactos y datos de experiencias al cargar la página
+window.onload = function() {
+    cargarContactos(); // Si tienes esta función definida
+    cargarDatos(); // Si tienes esta función definida
+    cargarTarjetasEducacion(); // Cargar tarjetas de educación
+    cargarTarjetasExperiencia(); // Cargar tarjetas de experiencia
+};
+
+
+// Funciones para gestionar contactos
+function abrirModal(modalId) {
+    document.getElementById(modalId).style.display = "block";
+    document.body.style.overflow = "hidden"; // Previene el scroll del body
+}
+
+function cerrarModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+    document.body.style.overflow = "auto"; // Restaura el scroll
+}
+
+// Cerrar el modal si se hace clic fuera de él
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+}
+
+
+function cargarContactos() {
+    const contactos = JSON.parse(localStorage.getItem('contactos')) || {};
+    for (const [key, value] of Object.entries(contactos)) {
+        crearContactoElemento(key, value);
+    }
+}
+
+
 
 // Funciones para gestionar datos de experiencias
 function cargarDatos() {
-    document.getElementById('titulo-1-input').value = localStorage.getItem('titulo1') || '';
-    document.getElementById('entrada-1-input').value = localStorage.getItem('entrada1') || '';
-    document.getElementById('titulo-2-input').value = localStorage.getItem('titulo2') || '';
-    document.getElementById('entrada-2-input').value = localStorage.getItem('entrada2') || '';
-    document.getElementById('titulo-3-input').value = localStorage.getItem('titulo3') || '';
-    document.getElementById('entrada-3-input').value = localStorage.getItem('entrada3') || '';
-    document.getElementById('titulo-4-input').value = localStorage.getItem('titulo4') || '';
-    document.getElementById('entrada-4-input').value = localStorage.getItem('entrada4') || '';
-    document.getElementById('titulo-5-input').value = localStorage.getItem('titulo5') || '';
-    document.getElementById('entrada-5-input').value = localStorage.getItem('entrada5') || '';
-    document.getElementById('titulo-6-input').value = localStorage.getItem('titulo6') || '';
-    document.getElementById('entrada-6-input').value = localStorage.getItem('entrada6') || '';
-    document.getElementById('titulo-7-input').value = localStorage.getItem('titulo7') || '';
-    document.getElementById('entrada-7-input').value = localStorage.getItem('entrada7') || '';
-    document.getElementById('titulo-8-input').value = localStorage.getItem('titulo8') || '';
-    document.getElementById('entrada-8-input').value = localStorage.getItem('entrada8') || '';
+  let i = 1;
+  while (localStorage.getItem(`titulo${i}`) || localStorage.getItem(`entrada${i}`)) {
+    agregarInformacion(); // Esto incrementa contadorCampos automáticamente
+
+    document.getElementById(`titulo-${i}-input`).value = localStorage.getItem(`titulo${i}`) || '';
+    document.getElementById(`entrada-${i}-input`).value = localStorage.getItem(`entrada${i}`) || '';
+    i++;
+  }
 }
 
+
 function guardarCambios() {
-    localStorage.setItem('titulo1', document.getElementById('titulo-1-input').value);
-    localStorage.setItem('entrada1', document.getElementById('entrada-1-input').value);
-    localStorage.setItem('titulo2', document.getElementById('titulo-2-input').value);
-    localStorage.setItem('entrada2', document.getElementById('entrada-2-input').value);
-    localStorage.setItem('titulo3', document.getElementById('titulo-3-input').value);
-    localStorage.setItem('entrada3', document.getElementById('entrada-3-input').value);
-    localStorage.setItem('titulo4', document.getElementById('titulo-4-input').value);
-    localStorage.setItem('entrada4', document.getElementById('entrada-4-input').value);
-    localStorage.setItem('titulo5', document.getElementById('titulo-5-input').value);
-    localStorage.setItem('entrada5', document.getElementById('entrada-5-input').value);
-    localStorage.setItem('titulo6', document.getElementById('titulo-6-input').value);
-    localStorage.setItem('entrada6', document.getElementById('entrada-6-input').value);
-    localStorage.setItem('titulo7', document.getElementById('titulo-7-input').value);
-    localStorage.setItem('entrada7', document.getElementById('entrada-7-input').value);
-    localStorage.setItem('titulo8', document.getElementById('titulo-8-input').value);
-    localStorage.setItem('entrada8', document.getElementById('entrada-8-input').value);
-    alert("Cambios guardados exitosamente.");
+  for (let i = 1; i < contadorCampos; i++) {
+    const titulo = document.getElementById(`titulo-${i}-input`);
+    const entrada = document.getElementById(`entrada-${i}-input`);
+
+    if (titulo && entrada) {
+      localStorage.setItem(`titulo${i}`, titulo.value);
+      localStorage.setItem(`entrada${i}`, entrada.value);
+    }
+  }
+  alert("Cambios guardados exitosamente.");
 }
+
+let contadorCampos = 1;
+
+function agregarInformacion() {
+  const form = document.getElementById('edit-form');
+    // <input required="" type="text" name="text" autocomplete="off" class="input">
+    //     <label class="user-label">Apellidos</label>
+    const formRow = document.createElement('div');
+    formRow.className = 'form-row';
+    formRow.innerHTML=`<div class="input-group">
+        <input required="" type="text" name="text" autocomplete="off" class="input">
+            <label class="user-label">Campo ${contadorCampos}</label>
+        </div>
+
+        <div class="input-group">
+        <input required="" type="text" name="text" autocomplete="off" class="input">
+            <label class="user-label">Dato ${contadorCampos}</label>
+        </div>`
+
+  const tituloInput = document.createElement('input');
+  tituloInput.type = 'text';
+  // tituloInput.placeholder = `Campo ${contadorCampos}:`;
+  tituloInput.className = 'input';
+  tituloInput.id = `titulo-${contadorCampos}-input`;
+
+  const labelInput = document.createElement('label');
+  labelInput.className = 'user-label';
+  labelInput.innerHTML = `Campo ${contadorCampos}:`;
+
+  const entradaInput = document.createElement('input');
+  entradaInput.type = 'text';
+  entradaInput.placeholder = `Dato ${contadorCampos}`;
+  entradaInput.className = 'input';
+  entradaInput.id = `entrada-${contadorCampos}-input`;
+
+  const labelEntrada = document.createElement('label');
+  labelEntrada.className = 'user-label';
+  labelEntrada.innerHTML = `Dato ${contadorCampos}:`;
+
+  form.appendChild(formRow);
+
+  contadorCampos++;
+}
+
 
 //targetas
 //targetas
@@ -644,7 +684,7 @@ function agregarTarjetaProyecto(imagen = "", titulo = "", fecha = "", servicio =
       <label for="tecnologiasc-${tarjetaId}">Tecnologías:</label>
       <select id="tecnologias-${tarjetaId}" class="input-tecnologias">
         <option value="">Selecciona una tecnología</option>
-        <option value="Chow">chow</option>
+        <option value="Desarrollo de software">Desarrollo de software</option>
         <!-- Opciones se cargarán desde localStorage (implementar luego) -->
         
       </select>

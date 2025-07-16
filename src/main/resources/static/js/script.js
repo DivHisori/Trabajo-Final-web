@@ -164,8 +164,10 @@ btnPersonalizar.addEventListener('click', (event) => {
 });
 /*---------------------------------------------------------*/
 const guardarColor = localStorage.getItem('primaryColor');
+const guardarHover = localStorage.getItem('hoverColor');
 if (guardarColor) {
     document.documentElement.style.setProperty('--primary-color', guardarColor);
+    document.documentElement.style.setProperty('--hover-color', guardarHover);
 }
 
 const botonesColor = document.querySelectorAll('button.circulo-color');
@@ -173,16 +175,19 @@ const botonesColor = document.querySelectorAll('button.circulo-color');
 botonesColor.forEach(btn => {
     btn.addEventListener('click', () => {
         const nuevoColor = btn.getAttribute('data-color');
+        const nuevoHover = btn.getAttribute('data-hover');
         document.documentElement.style.setProperty('--primary-color', nuevoColor);
+        document.documentElement.style.setProperty('--hover-color', nuevoHover);
         localStorage.setItem('primaryColor', nuevoColor);
+        localStorage.setItem('hoverColor', nuevoHover);
     });
 });
 /*---------------------------boton-sol-luna------------------------------*/
 const rootStyle = getComputedStyle(document.documentElement);
 const originalBackground = rootStyle.getPropertyValue('--background-color').trim();
 const originalText = rootStyle.getPropertyValue('--text-color').trim();
-const backgroundSecundario = rootStyle.getPropertyValue('--secundary-background-color').trim();
-const colorFondoTargeta = rootStyle.getPropertyValue('--color-fondo-boton').trim();
+const backgroundSecundario = rootStyle.getPropertyValue('--secondary-bg').trim();
+const colorFondoTarjeta = rootStyle.getPropertyValue('--color-fondo-boton').trim();
 
 const invertedBackground = originalText;
 const invertedText = originalBackground;
@@ -199,14 +204,14 @@ function applyMode(mode) {
     if (mode === 'inverted') {
         document.documentElement.style.setProperty('--background-color', invertedBackground);
         document.documentElement.style.setProperty('--text-color', invertedText);
-        document.documentElement.style.setProperty('--secundary-background-color', colorFondoTargeta);
+        document.documentElement.style.setProperty('--secondary-bg', colorFondoTarjeta);
         iconSun.style.display = 'none';
         iconMoon.style.display = 'inline-block';
         btnLuzLuna.setAttribute('aria-pressed', 'true');
     } else {
         document.documentElement.style.setProperty('--background-color', originalBackground);
         document.documentElement.style.setProperty('--text-color', originalText);
-        document.documentElement.style.setProperty('--secundary-background-color', backgroundSecundario);
+        document.documentElement.style.setProperty('--secondary-bg', backgroundSecundario);
         iconSun.style.display = 'inline-block';
         iconMoon.style.display = 'none';
         btnLuzLuna.setAttribute('aria-pressed', 'false');
@@ -612,41 +617,6 @@ window.onload = function () {
         crearContactoElementoEnOtraLista(key, value, otraLista);
     }
 };
-function crearContactoElemento(tipo, dato, contenedor) {
-    const contactoDiv = document.createElement('div');
-    contactoDiv.className = 'contact-box';
-
-    const titulos = {
-        telefono: 'Número de Teléfono',
-        ubicacion: 'Ubicación',
-        correo: 'Correo Electrónico'
-    };
-
-    let icono;
-    switch (tipo) {
-        case 'telefono':
-            icono = '<i class="fas fa-phone"></i>';
-            break;
-        case 'Ubicacion':
-            icono = '<i class="fa-solid fa-location-dot"></i>';
-            break;
-        case 'correo':
-            icono = '<i class="fas fa-envelope"></i>';
-            break;
-        default:
-            icono = '';
-    }
-
-    contactoDiv.innerHTML = `
-        ${icono}
-        <div class="todo-texto-contacto">
-            <h4 class="contact-title">${titulos[tipo] || tipo.charAt(0).toUpperCase() + tipo.slice(1)}:</h4>
-            <p>${dato}</p>
-        </div>
-    `;
-
-    contenedor.appendChild(contactoDiv);
-}
 
 function cargarContactos() {
     const contactos = JSON.parse(localStorage.getItem('contactos')) || {};

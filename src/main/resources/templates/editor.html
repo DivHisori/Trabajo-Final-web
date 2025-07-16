@@ -4,69 +4,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style-editor.css">
+    <link rel="stylesheet" href="style-neweditor.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/brands.min.css"
-        integrity="sha512-58P9Hy7II0YeXLv+iFiLCv1rtLW47xmiRpC1oFafeKNShp8V5bKV/ciVtYqbk2YfxXQMt58DjNfkXFOn62xE+g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+          integrity="sha512-58P9Hy7II0YeXLv+iFiLCv1rtLW47xmiRpC1oFafeKNShp8V5bKV/ciVtYqbk2YfxXQMt58DjNfkXFOn62xE+g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet">
     <title id="tituloPagina">Cargando...</title>
 </head>
 
 <body>
-    <div class="container-color-botones">
-        <a class="boton-personalizacion-color" aria-expanded="false" aria-controls="menu-colores"
-            title="Abrir selector de colores"><i class="fa-solid fa-pen"></i></a>
-        <div class="menu-desplegable-colores" id="menu-colores" role="menu" aria-hidden="true" tabindex="-1">
-            <button class="circulo-color" data-color="#e93535" role="listitem"></button>
-            <button class="circulo-color" data-color="#00cc00" role="listitem"></button>
-            <button class="circulo-color" data-color="#ff5e00" role="listitem"></button>
-            <button class="circulo-color" data-color="#23a7ff" role="listitem"></button>
-            <button class="circulo-color" data-color="#9900ff" role="listitem"></button>
-        </div>
+<div class="container-color-botones">
+    <a class="boton-personalizacion-color" aria-expanded="false" aria-controls="menu-colores"
+       title="Abrir selector de colores"><i class="fa-solid fa-pen"></i></a>
+    <div class="menu-desplegable-colores" id="menu-colores" role="menu" aria-hidden="true" tabindex="-1">
+        <button class="circulo-color" data-color="#e93535" data-hover="rgba(233, 53, 53, 0.2)" role="listitem"></button>
+        <button class="circulo-color" data-color="#00cc00" data-hover="rgba(71, 233, 53, 0.2)" role="listitem"></button>
+        <button class="circulo-color" data-color="#ff5e00" data-hover="rgba(233, 128, 53, 0.2)"
+                role="listitem"></button>
+        <button class="circulo-color" data-color="#23a7ff" data-hover="rgba(53, 83, 233, 0.2)" role="listitem"></button>
+        <button class="circulo-color" data-color="#9900ff" data-hover="rgba(167, 53, 233, 0.2)"
+                role="listitem"></button>
     </div>
-    <button id="color-toggle-btn" aria-label="Cambiar colores de fondo y texto" aria-pressed="false" type="button">
-        <i id="icon-sun" class="fa-solid fa-sun" style="display: inline-block;"></i>
-        <i id="icon-moon" class="fa-solid fa-moon" style="display: none;"></i>
-    </button>
-    <div th:replace="/fragments/usos :: cabeza"></div>
-    <main>
-        <section class="form-container" aria-labelledby="form-title">
-            <h2 id="form-title" class="form-title">Cambiar datos</h2>
-            <form id="data-form" class="data-form" novalidate>
+</div>
+<script>
+    document.querySelectorAll('.circulo-color').forEach(boton => {
+        const color = boton.getAttribute('data-color');
+        if (color) {
+            boton.style.backgroundColor = color;
+        }
+    });
+</script>
+
+<button id="color-toggle-btn" aria-label="Cambiar colores de fondo y texto" aria-pressed="false" type="button">
+    <i id="icon-sun" class="fa-solid fa-sun" style="display: inline-block;"></i>
+    <i id="icon-moon" class="fa-solid fa-moon" style="display: none;"></i>
+</button>
+<div th:replace="/fragments/usos :: cabeza"></div>
+<main>
+    <section class="form-container" aria-labelledby="form-title">
+        <div class="formulario">
+
+            <div class="general" id="info-personal">
+                <h2 id="form-title" class="form-title">Cambiar datos</h2>
                 <div class="image-upload-wrapper" aria-label="Subir imagen de perfil">
-                    <input type="file" id="image-upload" accept="image/*" hidden />
-                    <label for="image-upload" class="image-upload-circle" tabindex="0" role="button" id="upload-circle">
+                    <input type="file" id="image-upload" accept="image/*" hidden/>
+                    <label for="image-upload" class="image-upload-circle" tabindex="0" role="button"
+                           id="upload-circle">
                         <div class="upload-placeholder" aria-hidden="true">
                             <i class="fas fa-cloud-upload-alt"></i>
                         </div>
                         <img src="" alt="Previsualización de la imagen subida" class="image-preview"
-                            id="image-preview" />
+                             id="image-preview"/>
                     </label>
-                    <button type="button" class="btn-save" id="btn-save">Guardar Imagen</button>
+                    <button type="button" class="btn-save-img" id="btn-save">Guardar imagen</button>
                 </div>
 
                 <!-- Nuevos inputs agregados -->
-                <div class="form-group">
-                    <input type="text" id="nombre" placeholder="Ingrese su nombre" />
-                    <button type="button" class="btn-save" onclick="guardarNombre()">Guardar Nombre</button>
+                <div class="form-row">
+                    <div class="input-group">
+                        <input required="" type="text" name="text" autocomplete="off" class="input">
+                        <label class="user-label">Nombres</label>
+                    </div>
+                    <button type="button" class="btn-save" onclick="guardarNombre()">Guardar</button>
                 </div>
-
-                <div class="form-group">
-                    <input type="text" id="apellido" placeholder="Ingrese su apellido" />
-                    <button type="button" class="btn-save" onclick="guardarApellido()">Guardar Apellido</button>
+                <div class="form-row">
+                    <div class="input-group">
+                        <input required="" type="text" name="text" autocomplete="off" class="input">
+                        <label class="user-label">Apellidos</label>
+                    </div>
+                    <button type="button" class="btn-save" onclick="guardarApellido()">Guardar</button>
                 </div>
-
-                <div class="form-group">
-                    <textarea id="descripcion" placeholder="Ingrese una descripción"></textarea>
-                    <button type="button" class="btn-save" onclick="guardarDescripcion()">Guardar Descripción</button>
+                <div class="form-row">
+                    <div class="input-group">
+                                <textarea required="" type="text" name="text" autocomplete="off" class="textarea"
+                                          id="descripcion"></textarea>
+                        <label class="user-label">Descripcion</label>
+                    </div>
+                    <button type="button" class="btn-save" onclick="guardarDescripcion()">Guardar</button>
                 </div>
-
 
                 <div class="social-wrapper">
                     <select id="social-select" class="social-select">
@@ -78,105 +99,135 @@
                         <option value="fa-brands fa-youtube">YouTube</option>
                         <option value="fa-brands fa-github">GitHub</option>
                     </select>
-                    <input type="text" id="social-link" placeholder="Enlace a la red social" />
-                    <button id="btn-add-social">Agregar Red Social</button>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <input required="" type="text" name="text" id="social-link" autocomplete="off"
+                                   class="input" value="https://">
+                            <label class="user-label">Enlace</label>
+                        </div>
+                        <button type="button" id="btn-add-social">Agregar</button>
+                    </div>
                 </div>
+            </div>
+
+            <div class="general" id="redes">
+                <h2>Redes agregadas</h2>
                 <div class="social-list" id="social-list"></div>
+            </div>
 
-
-
-                <!-- Sección para subir y descargar CV -->
-                <h3 class="title-cv">Subir CV:</h3>
-                <div class="form-group">
-                    <input type="file" id="cv-upload" accept=".pdf" />
-                    <button type="button" class="btn-save" onclick="guardarCV()">Subir CV</button>
-                </div>
-                <!-- Fin nuevos inputs -->
-
-
+            <div class="general" id="editInfo">
                 <h2>Editar Información</h2>
                 <div id="edit-form" class="editar-form">
-
-                    <input type="text" id="titulo-1-input" class="entrada-tabla" placeholder="Campo 1:">
-                    <input type="text" id="entrada-1-input" placeholder="dato 1" class="entrada-tabla">
-                    <input type="text" id="titulo-2-input" placeholder="Campo 2:" class="entrada-tabla">
-                    <input type="text" id="entrada-2-input" placeholder="dato 2" class="entrada-tabla">
-                    <input type="text" id="titulo-3-input" placeholder="Campo 3:" class="entrada-tabla">
-
-                    <input type="text" id="entrada-3-input" placeholder="dato 3:" class="entrada-tabla">
-
-                    <input type="text" id="titulo-4-input" placeholder="Campo 4:" class="entrada-tabla">
-                    <input type="text" id="entrada-4-input" placeholder="dato 4" class="entrada-tabla">
-                    <input type="text" id="titulo-5-input" placeholder="Campo 5:" class="entrada-tabla">
-                    <input type="text" id="entrada-5-input" placeholder="dato 5" class="entrada-tabla">
-                    <input type="text" id="titulo-6-input" placeholder="Campo 6:" class="entrada-tabla">
-                    <input type="text" id="entrada-6-input" placeholder="dato 6" class="entrada-tabla">
-                    <input type="text" id="titulo-7-input" placeholder="Campo 7:" class="entrada-tabla">
-                    <input type="text" id="entrada-7-input" placeholder="dato 7" class="entrada-tabla">
-                    <input type="text" id="titulo-8-input" placeholder="Campo 8:" class="entrada-tabla">
-                    <input type="text" id="entrada-8-input" placeholder="dato 8" class="entrada-tabla">
-
-                    <button type="button" onclick="guardarCambios()">Guardar Cambios</button>
+                    <!-- Aquí se agregarán los campos dinámicamente -->
                 </div>
+                <div class="form-row" id="botones">
+                    <button type="button" class="btn-edit" onclick="agregarInformacion()">Agregar</button>
+                    <button type="button" class="btn-edit" onclick="guardarCambios()">Guardar</button>
+                </div>
+            </div>
+
+            <div class="general" id="curriculum">
+                <!-- Sección para subir y descargar CV -->
+
+                <div class="form-row-edit">
+                    <input type="file" id="cv-upload" accept=".pdf"/>
+                    <button type="button" class="btn-save" onclick="guardarCV()">Subir CV</button>
+                </div>
+            </div>
+
+            <div class="general" id="mediosContacto">
+                <h3>Medios de Contacto</h3>
+                <button type="button" class="btn-agregar" onclick="abrirModal('modalContacto')">
+                    <i class="fas fa-plus"></i> Agregar Contacto
+                </button>
+                <div id="contactos-list" class="contact-container"></div>
+            </div>
+
+            <!-- Modal de Contacto -->
+            <div id="modalContacto" class="modal">
+                <div class="modal-contenido">
+                    <span class="cerrar-modal" onclick="cerrarModal('modalContacto')">&times;</span>
+                    <h3>Agregar Medio de Contacto</h3>
+                    <select id="contact-type">
+                        <option value="">Selecciona un medio</option>
+                        <option value="telefono">Teléfono</option>
+                        <option value="ubicacion">Ubicación</option>
+                        <option value="correo">Correo</option>
+                    </select>
+                    <input type="text" id="contact-input" placeholder="Ingresa el dato">
+                    <button type="button" class="btn-save" onclick="guardarContacto(), cerrarModal('modalContacto')">Guardar</button>
+                </div>
+            </div>
+
+
+
+            <div class="general" id="contratame">
                 <h3>¿Por qué contratarme?</h3>
                 <textarea id="porque-contratarme-input"
-                    placeholder="Escribe aquí el párrafo sobre por qué contratarme..."></textarea>
-                <button type="button" onclick="guardarDescripcionContratacion()">Guardar Descripción</button>
+                          placeholder="Escribe aquí el párrafo sobre por qué contratarme..."></textarea>
+                <button type="button" onclick="guardarDescripcionContratacion()">Guardar
+                    Descripción
+                </button>
+            </div>
 
+            <div class="general" id="trabajemos">
                 <h3>Trabajemos Juntos</h3>
                 <textarea id="Trabajemos-juntos-input"
-                    placeholder="Escribe aquí el párrafo para la descricion Trabajemos juntos..."></textarea>
+                          placeholder="Escribe aquí el párrafo para la descricion Trabajemos juntos..."></textarea>
                 <button type="button" onclick="TrabajemosJuntos()">Guardar Descripción</button>
+            </div>
 
-                <h3>Agregar Medio de Contacto</h3>
-                <select id="contact-type">
-                    <option value="">Selecciona un medio</option>
-                    <option value="telefono">Teléfono</option>
-                    <option value="ubicacion">Ubicación</option>
-                    <option value="correo">Correo</option>
-                </select>
-                <input type="text" id="contact-input" placeholder="Ingresa el dato">
-                <button type="button" onclick="guardarContacto()">Guardar</button>
-                <div id="contactos-list" class="contact-container"></div>
-
-
-
+            <div class="general" id="educacion">
                 <div class="formulario-edicion">
                     <h3>Mis Educacion</h3>
 
                     <button id="agregar-tarjeta" class="btn-agregar" type="button">Agregar Tarjeta</button>
-
-                    <div class="container-tarjetas" id="container-tarjetas"></div>
                 </div>
+            </div>
 
+            <div class="general" id="educacionTarjetas">
+                <!-- Contenedor donde se renderizarán las tarjetas -->
+                <div class="container-tarjetas" id="container-tarjetas"></div>
+            </div>
+
+            <div class="general" id="experiencia">
                 <div class="formulario-experiencia">
                     <h3>Mi Experiencia</h3>
-                    <button id="agregar-tarjeta-experiencia" class="btn-agregar" type="button">Agregar Tarjeta de Experiencia</button>
-                    <div class="container-tarjetas-experiencia" id="container-tarjetas-experiencia"></div>
-                  </div>
+                    <button id="agregar-tarjeta-experiencia" class="btn-agregar" type="button">Agregar
+                        Tarjeta de
+                        Experiencia
+                    </button>
 
+                </div>
+            </div>
 
+            <div class="general" id="experienciaTarjetas">
+                <div class="container-tarjetas-experiencia" id="container-tarjetas-experiencia"></div>
+            </div>
+
+            <div class="general" id="proyectos">
                 <h3>Mis Proyectos</h3>
                 <!-- Botón para agregar nueva tarjeta -->
                 <button id="agregar-tarjeta-proyecto" class="btn-agregar" type="button">
                     <i class="fas fa-plus"></i> Agregar Proyecto
                 </button>
+            </div>
+
+            <div class="general" id="proyectosTarjetas">
                 <!-- Contenedor donde se renderizarán las tarjetas -->
                 <div class="container-tarjetas-proyectos" id="container-tarjetas-proyectos"></div>
+            </div>
+        </div>
+    </section>
+</main>
 
 
-            </form>
-        </section>
-    </main>
-
-
-
-    <a href="/index"> Volver a la pagina principal</a>
-    <script src="/js/script-formulario.js"></script>
-    <script src="/js/script.js"></script>
-    <script>
-        cargarProyectos('container-tarjetas-proyectos', 'edicion');
-    </script>
+<a href="/index"> Volver a la pagina principal</a>
+<script src="script-formulario.js"></script>
+<script src="script.js"></script>
+<script>
+    cargarProyectos('container-tarjetas-proyectos', 'edicion');
+</script>
 </body>
 
 </html>
