@@ -33,32 +33,31 @@ btnSave.addEventListener('click', function() {
 });
 //==========================================================
 //=================Guarda-nombre=========================== 
-//==========================================================     
+//==========================================================
 function guardarNombre() {
-    const nombreInput = document.querySelector('input[id="nombre"] + input');
-    const nombreValue = nombreInput.value.trim(); // Eliminar espacios en blanco
+    const nombreInput = document.getElementById('nombre-input');
+    const nombreValue = nombreInput.value.trim();
     if (nombreValue === '') {
         alert('No hay datos para almacenar en el nombre.');
-        return; // No guardar nada
+        return;
     }
     localStorage.setItem('nombre', nombreValue);
     alert('Nombre guardado con éxito.');
-
 }
 //==========================================================
-//=================Guarda-apellido=========================== 
-//========================================================== 
+//=================Guarda-apellido===========================
+//==========================================================
 function guardarApellido() {
-    const apellidoInput = document.querySelector('input[id="apellido"] + input');
-    const apellidoValue = apellidoInput.value.trim(); // Eliminar espacios en blanco
+    const apellidoInput = document.getElementById('apellido-input');
+    const apellidoValue = apellidoInput.value.trim();
     if (apellidoValue === '') {
         alert('No hay datos para almacenar en el apellido.');
-        return; // No guardar nada
+        return;
     }
     localStorage.setItem('apellido', apellidoValue);
     alert('Apellido guardado con éxito.');
-
 }
+
 //==========================================================
 //=================Guarda-descripcion======================= 
 //========================================================== 
@@ -395,48 +394,30 @@ function guardarCambios() {
   alert("Cambios guardados exitosamente.");
 }
 
-let contadorCampos = 1;
+let contadorCampos = 1; // Asegúrate de inicializarlo fuera de la función
 
 function agregarInformacion() {
-  const form = document.getElementById('edit-form');
-    // <input required="" type="text" name="text" autocomplete="off" class="input">
-    //     <label class="user-label">Apellidos</label>
+    const form = document.getElementById('edit-form');
+
     const formRow = document.createElement('div');
     formRow.className = 'form-row';
-    formRow.innerHTML=`<div class="input-group">
-        <input required="" type="text" name="text" autocomplete="off" class="input">
-            <label class="user-label">Campo ${contadorCampos}</label>
+
+    formRow.innerHTML = `
+        <div class="input-group">
+            <input required type="text" name="campo-${contadorCampos}" autocomplete="off" class="input" id="titulo-${contadorCampos}-input">
+            <label class="user-label" for="titulo-${contadorCampos}-input">Campo ${contadorCampos}</label>
         </div>
 
         <div class="input-group">
-        <input required="" type="text" name="text" autocomplete="off" class="input">
-            <label class="user-label">Dato ${contadorCampos}</label>
-        </div>`
+            <input required type="text" name="dato-${contadorCampos}" autocomplete="off" class="input" id="entrada-${contadorCampos}-input">
+            <label class="user-label" for="entrada-${contadorCampos}-input">Dato ${contadorCampos}</label>
+        </div>
+    `;
 
-  const tituloInput = document.createElement('input');
-  tituloInput.type = 'text';
-  // tituloInput.placeholder = `Campo ${contadorCampos}:`;
-  tituloInput.className = 'input';
-  tituloInput.id = `titulo-${contadorCampos}-input`;
-
-  const labelInput = document.createElement('label');
-  labelInput.className = 'user-label';
-  labelInput.innerHTML = `Campo ${contadorCampos}:`;
-
-  const entradaInput = document.createElement('input');
-  entradaInput.type = 'text';
-  entradaInput.placeholder = `Dato ${contadorCampos}`;
-  entradaInput.className = 'input';
-  entradaInput.id = `entrada-${contadorCampos}-input`;
-
-  const labelEntrada = document.createElement('label');
-  labelEntrada.className = 'user-label';
-  labelEntrada.innerHTML = `Dato ${contadorCampos}:`;
-
-  form.appendChild(formRow);
-
-  contadorCampos++;
+    form.appendChild(formRow);
+    contadorCampos++;
 }
+
 
 
 //targetas

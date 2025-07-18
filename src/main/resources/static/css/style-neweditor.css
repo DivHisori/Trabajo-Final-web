@@ -272,6 +272,15 @@ section.form-container {
     grid-row-start: 8;
 }
 
+#dashboard{
+    grid-row: span 3 / span 3;
+    grid-row-start: 10;
+}
+
+canvas {
+    margin-top: 20px;
+    z-index: 10000;
+}
 #contratame {
     grid-row: span 3 / span 3;
     grid-column-start: 2;

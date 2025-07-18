@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="/css/style-neweditor.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/brands.min.css"
           integrity="sha512-58P9Hy7II0YeXLv+iFiLCv1rtLW47xmiRpC1oFafeKNShp8V5bKV/ciVtYqbk2YfxXQMt58DjNfkXFOn62xE+g=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -68,20 +70,20 @@
                 <!-- Nuevos inputs agregados -->
                 <div class="form-row">
                     <div class="input-group">
-                        <input required="" type="text" name="text" autocomplete="off" class="input" id="nombre-input">
+                        <input required type="text" name="text" autocomplete="off" class="input" id="nombre-input">
                         <label class="user-label" for="nombre-input">Nombres</label>
-
                     </div>
                     <button type="button" class="btn-save" onclick="guardarNombre()">Guardar</button>
                 </div>
+
                 <div class="form-row">
                     <div class="input-group">
-                        <input required="" type="text" name="text" autocomplete="off" class="input" id="apellido-input">
+                        <input required type="text" name="text" autocomplete="off" class="input" id="apellido-input">
                         <label class="user-label" for="apellido-input">Apellidos</label>
-
                     </div>
                     <button type="button" class="btn-save" onclick="guardarApellido()">Guardar</button>
                 </div>
+
                 <div class="form-row">
                     <div class="input-group">
                                 <textarea required="" type="text" name="text" autocomplete="off" class="textarea"
@@ -157,10 +159,18 @@
                         <option value="correo">Correo</option>
                     </select>
                     <input type="text" id="contact-input" placeholder="Ingresa el dato">
-                    <button type="button" class="btn-save" onclick="guardarContacto(), cerrarModal('modalContacto')">Guardar</button>
+                    <button type="button" class="btn-save" onclick="guardarContacto(), cerrarModal('modalContacto')">
+                        Guardar
+                    </button>
                 </div>
             </div>
 
+            <div class="general" id="dashboard">
+                <div class="dashboard-container">
+                    <h2>Proyectos por Categoría</h2>
+                    <canvas id="graficoProyectos"></canvas>
+                </div>
+            </div>
 
 
             <div class="general" id="contratame">
@@ -227,9 +237,7 @@
 <a href="/index"> Volver a la pagina principal</a>
 <script src="/js/script.js"></script>
 <script src="/js/script-formulario.js"></script>
-<script>
-    cargarProyectos('container-tarjetas-proyectos', 'edicion');
-</script>
+<script type="module" src="/js/dashboard.js"></script>
 </body>
 
 </html>

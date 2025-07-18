@@ -357,9 +357,6 @@ h5{
     transition: all 0.3s ease;
 }
 
-.proyectos-targeta:hover img {
-      opacity: 0;
-    }
 
 .etiquetas-tecnologias{
     display: flex;
